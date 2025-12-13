@@ -217,6 +217,44 @@ const runHeroTyping = () => {
   setTimeout(step, 600);
 };
 
+const initMobileNav = () => {
+  const nav = document.getElementById('primary-nav');
+  const toggle = document.querySelector('.menu-toggle');
+  if (!nav || !toggle) return;
+
+  const closeNav = () => {
+    nav.classList.remove('open');
+    toggle.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('nav-open');
+  };
+
+  const openNav = () => {
+    nav.classList.add('open');
+    toggle.classList.add('open');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('nav-open');
+  };
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', closeNav);
+  });
+
+  document.addEventListener('click', (event) => {
+    if (nav.classList.contains('open') && !nav.contains(event.target) && event.target !== toggle) {
+      closeNav();
+    }
+  });
+};
+
 window.addEventListener('DOMContentLoaded', () => {
   observePanels();
   animateSkills();
@@ -224,5 +262,6 @@ window.addEventListener('DOMContentLoaded', () => {
   handleForm();
   initParticles();
   initLightningButtons();
+  initMobileNav();
   runHeroTyping();
 });

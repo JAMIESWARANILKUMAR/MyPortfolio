@@ -1,111 +1,114 @@
 .tools {
+  padding: var(--section-padding-desktop);
   position: relative;
-  padding: 6rem 4.5rem;
-  background: var(--bg);
-  overflow: hidden;
-}
-
-@media (max-width: 768px) {
-  .tools {
-    padding: 4rem 1.5rem;
-  }
+  background: transparent;
 }
 
 .container {
-  max-width: 1200px;
+  width: 100%;
+  max-width: var(--max-content-width);
   margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
-.marqueeContainer {
-  margin-top: 3rem;
-  position: relative;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-top: 3.5rem;
 }
 
-/* Gradient fades for the edges */
-.marqueeContainer::before,
-.marqueeContainer::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  width: 150px;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.marqueeContainer::before {
-  left: 0;
-  background: linear-gradient(to right, var(--bg), transparent);
-}
-
-.marqueeContainer::after {
-  right: 0;
-  background: linear-gradient(to left, var(--bg), transparent);
-}
-
-.marqueeWrapper {
-  display: flex;
-  overflow: hidden;
-  user-select: none;
-  gap: 1.5rem;
-}
-
-.track {
-  display: flex;
-  gap: 1.5rem;
-  flex-shrink: 0;
-  animation: scroll 30s linear infinite;
-  min-width: 100%;
-}
-
-.trackReverse {
-  animation: scroll-reverse 35s linear infinite;
-}
-
-.marqueeWrapper:hover .track,
-.marqueeWrapper:hover .trackReverse {
-  animation-play-state: paused;
-}
-
-@keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-100% - 1.5rem)); }
-}
-
-@keyframes scroll-reverse {
-  0% { transform: translateX(calc(-100% - 1.5rem)); }
-  100% { transform: translateX(0); }
-}
-
-.chip {
+.toolCard {
+  background: var(--gradient-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 18px;
+  padding: 1.25rem;
   display: flex;
   align-items: center;
-  gap: 0.8rem;
-  padding: 1rem 1.8rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 999px;
-  font-size: 1.1rem;
-  color: var(--text-sheen);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-  cursor: default;
+  gap: 1rem;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease;
 }
 
-.chip:hover {
-  background: rgba(89, 229, 255, 0.1);
-  border-color: rgba(89, 229, 255, 0.4);
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(89, 229, 255, 0.15);
-  color: #fff;
+.toolCard:hover {
+  transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 15px 30px -10px rgba(56, 189, 248, 0.1);
 }
 
-.chip i {
-  font-size: 1.4rem;
+.iconBox {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
   color: var(--accent-cyan);
+  flex-shrink: 0;
 }
 
-.chip:hover i {
-  color: var(--accent-purple);
+.toolInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.toolName {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.toolCategory {
+  font-size: 0.74rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+/* Smartphone Optimization */
+@media (max-width: 640px) {
+  .tools {
+    padding: var(--section-padding-mobile);
+  }
+
+  .container {
+    padding: 0 1.15rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-top: 2.25rem;
+  }
+
+  .toolCard {
+    padding: 0.95rem;
+    gap: 0.75rem;
+    border-radius: 14px;
+  }
+
+  .iconBox {
+    width: 36px;
+    height: 36px;
+    font-size: 1.05rem;
+  }
+
+  .toolName {
+    font-size: 0.85rem;
+  }
+
+  .toolCategory {
+    font-size: 0.68rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }

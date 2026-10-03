@@ -2,137 +2,112 @@
 
 import Image from "next/image";
 import styles from "./AboutSection.module.css";
-import { useEffect, useRef } from "react";
 import SectionHeading from "./SectionHeading";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1,
-    }
-  }
-};
-
-const textVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { type: "spring" as const, stiffness: 100, damping: 20 }
-  }
-};
-
-const badgeVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: { 
-    opacity: 1, 
-    scale: 1,
-    transition: { type: "spring" as const, stiffness: 120, damping: 15 }
-  }
-};
+const LEADERSHIP_PILLARS = [
+  {
+    icon: "fa-solid fa-brain-circuit",
+    title: "Enterprise AI & Predictive Architecture",
+    desc: "Designing machine learning pipelines, prompt engineering workflows, and business intelligence models that convert raw institutional data into strategic foresight.",
+  },
+  {
+    icon: "fa-solid fa-users-viewfinder",
+    title: "Strategic Human Capital Architecture",
+    desc: "Synthesizing HRCP/SHRM-aligned talent methodologies, employee retention systems, and agile workforce cultures engineered for high-growth scalability.",
+  },
+  {
+    icon: "fa-solid fa-chalkboard-user",
+    title: "Executive Academy & Ecosystem Mentorship",
+    desc: "Directing Vyntyra Academy programs across India — empowering over 500 emerging technical minds, corporate professionals, and university cohorts.",
+  },
+];
 
 export default function AboutSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"]
-  });
-
-  const imageY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
-
   return (
-    <section className={styles.about} id="about" ref={sectionRef}>
+    <section className={styles.about} id="about">
       <div className={styles.container}>
+        <SectionHeading
+          title="Executive Profile"
+          subtitle="Synthesizing artificial intelligence systems with strategic human capital architecture."
+        />
+
         <div className={styles.grid}>
-          
-          {/* Left Column: Asymmetric Image Frame */}
-          <div className={styles.imageColumn}>
-            <motion.div 
-              className={styles.imageMask}
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-            >
-              <motion.div style={{ y: imageY, width: "100%", height: "120%", position: "absolute", top: "-10%" }}>
-                <Image 
-                  src="/Profile.webp" 
-                  alt="Portrait of Jami Eswar Anil Kumar" 
+          {/* Left Column: Chamfered Executive Portrait Frame */}
+          <div className={styles.portraitColumn}>
+            <div className={styles.portraitCard}>
+              <div className={styles.imageContainer}>
+                <Image
+                  src="/Profile.webp"
+                  alt="Jami Eswar Anil Kumar - Founder & Director"
                   fill
-                  className={styles.image}
-                  sizes="(max-width: 960px) 100vw, 50vw"
+                  className={styles.portraitImage}
+                  sizes="(max-width: 768px) 100vw, 480px"
                   priority
                 />
-              </motion.div>
-              <div className={styles.imageOverlay} />
-            </motion.div>
+                <div className={styles.imageOverlay} />
+              </div>
 
-            {/* Floating Badges */}
-            <motion.div 
-              className={styles.badgeContainer}
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <motion.div className={styles.floatingBadge} variants={badgeVariants} whileHover={{ scale: 1.05 }}>
-                <span className={styles.badgeIcon}>🏆</span>
-                <div className={styles.badgeText}>
-                  <strong>Google Campus Ambassador '26</strong>
-                  <span>Leading dev communities</span>
+              {/* Verified Executive Credentials Footnote */}
+              <div className={styles.portraitFootnote}>
+                <div className={styles.footnoteBadge}>
+                  <i className="fa-solid fa-award" />
+                  <div>
+                    <strong>Google Campus Ambassador '26</strong>
+                    <span>Developer Ecosystems Leader</span>
+                  </div>
                 </div>
-              </motion.div>
-              
-              <motion.div className={`${styles.floatingBadge} ${styles.badgeSecondary}`} variants={badgeVariants} whileHover={{ scale: 1.05 }}>
-                <span className={styles.badgeIcon}>✨</span>
-                <div className={styles.badgeText}>
-                  <strong>TieVizag Invitee</strong>
-                  <span>Entrepreneurial excellence</span>
+                <div className={styles.footnoteBadgeSecondary}>
+                  <i className="fa-solid fa-certificate" />
+                  <div>
+                    <strong>TiE Vizag Emerging Entrepreneur</strong>
+                    <span>Recognized Innovation Cohort</span>
+                  </div>
                 </div>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
 
-          {/* Right Column: Editorial Typography */}
-          <div className={styles.textColumn}>
-            <SectionHeading title="About Me" subtitle="Merging human-centered focus with AI and data." />
-            
-            <motion.div 
-              className={styles.content}
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-            >
-              <motion.h3 className={styles.headline} variants={textVariants}>
-                Founder & Director of <span className={styles.highlight}>Vyntyra Consultancy Services</span>
-              </motion.h3>
-              
-              <motion.p className={styles.paragraph} variants={textVariants}>
-                Currently pursuing my B.Tech in Computer Science and Engineering (AI & ML) at the Aditya Institute of Technology and Management (2024–2028), I bridge the gap between advanced technical solutions and human-centric organizational growth.
-              </motion.p>
-              
-              <motion.ul className={styles.list} variants={containerVariants}>
-                <motion.li variants={textVariants}>
-                  <i className="fa-solid fa-chalkboard-user"></i> 
-                  <span>Leading Vyntyra Academy to conduct technical workshops and mentorship across India.</span>
-                </motion.li>
-                <motion.li variants={textVariants}>
-                  <i className="fa-solid fa-microchip"></i> 
-                  <span>Specialized in AI/ML applications, Power BI, prompt engineering, and data analytics.</span>
-                </motion.li>
-                <motion.li variants={textVariants}>
-                  <i className="fa-solid fa-users-gear"></i> 
-                  <span>Architecting equitable cultures and future-ready growth frameworks for modern businesses.</span>
-                </motion.li>
-              </motion.ul>
-            </motion.div>
-          </div>
+          {/* Right Column: Founder Thesis & Strategic Pillars */}
+          <div className={styles.bioColumn}>
+            <div className={styles.thesisHeader}>
+              <span className="corporate-badge corporate-badge-emerald">
+                <span className="status-pulse" />
+                <span>Founder & Executive Director</span>
+              </span>
+              <h3 className={styles.thesisTitle}>
+                Directing <span className="text-gradient">Vyntyra Consultancy Services</span>
+              </h3>
+              <p className={styles.thesisSummary}>
+                Currently pursuing a dual-pedigree path in Computer Science & Engineering (AI & ML) at the 
+                Aditya Institute of Technology and Management alongside a Bachelor of Business Administration (BBA) 
+                at University of the People (USA), Jami Eswar Anil Kumar operates at the rare intersection of deep-tech 
+                engineering and strategic corporate governance.
+              </p>
+            </div>
 
+            {/* Strategic Pillars Bento Grid */}
+            <div className={styles.pillarsGrid}>
+              {LEADERSHIP_PILLARS.map((pillar, i) => (
+                <motion.div
+                  key={i}
+                  className={styles.pillarCard}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.4, delay: i * 0.1 }}
+                >
+                  <div className={styles.pillarIcon}>
+                    <i className={pillar.icon} />
+                  </div>
+                  <div className={styles.pillarContent}>
+                    <h4 className={styles.pillarTitle}>{pillar.title}</h4>
+                    <p className={styles.pillarDesc}>{pillar.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

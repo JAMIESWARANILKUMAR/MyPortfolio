@@ -4,233 +4,150 @@ import { useRef, useEffect, useState } from "react";
 import styles from "./HeroSection.module.css";
 import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 
-// Each letter bounces on hover; CSS handles the chrome shimmer
-const HoverLetter = ({ letter, variants }: { letter: string; variants: any }) => {
-  return (
-    <motion.span
-      variants={variants}
-      style={{
-        display: "inline-block",
-        whiteSpace: letter === " " ? "pre" : "normal",
-        cursor: "default",
-      }}
-      whileHover={{ scale: 1.35, y: -12, zIndex: 10 }}
-      transition={{ type: "spring", stiffness: 450, damping: 14 }}
-    >
-      {letter}
-    </motion.span>
-  );
-};
+const INDIAN_GREETINGS = [
+  { text: "Namaste", lang: "Hindi", script: "नमस्ते" },
+  { text: "Namaskaram", lang: "Telugu", script: "నమస్కారం" },
+  { text: "Vanakkam", lang: "Tamil", script: "வணக்கம்" },
+  { text: "Nômōskar", lang: "Bengali", script: "নমস্কার" },
+  { text: "Namaskar", lang: "Marathi", script: "नमस्कार" },
+  { text: "Namaskara", lang: "Kannada", script: "ನಮಸ್ಕಾರ" },
+  { text: "Namaskaram", lang: "Malayalam", script: "നമస్కാരം" },
+  { text: "Kem Chho", lang: "Gujarati", script: "કેમ છો" },
+  { text: "Sat Sri Akal", lang: "Punjabi", script: "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ" },
+  { text: "Namaskar", lang: "Odia", script: "ନମସ୍କାର" },
+  { text: "Namaskar", lang: "Assamese", script: "নমস্কাৰ" },
+  { text: "Namo Namah", lang: "Sanskrit", script: "नमो नमः" },
+  { text: "Adaab", lang: "Urdu", script: "آداب" },
+];
 
-// Word-level wrapper that forces each word into its own premium font
-const nameWords: { text: string; font: string; cls: string }[] = [
-  { text: "JAMI",  font: "'Unbounded', sans-serif",        cls: "wordJami"  },
-  { text: "ESWAR", font: "'Syne', sans-serif",              cls: "wordEswar" },
-  { text: "ANIL",  font: "'Plus Jakarta Sans', sans-serif", cls: "wordAnil"  },
-  { text: "KUMAR", font: "'Outfit', sans-serif",            cls: "wordKumar" },
+const EXECUTIVE_METRICS = [
+  { label: "Executive Leadership", value: "Founder & Director", meta: "Vyntyra Consultancy Services" },
+  { label: "Talent & Strategy Reach", value: "500+", meta: "Mentees & Emerging Leaders" },
+  { label: "Institutional Accreditations", value: "B.Tech + BBA", meta: "AI/ML & Business Administration" },
+  { label: "Global Recognitions", value: "Google & TiE", meta: "Campus Ambassador & Cohort" },
 ];
 
 export default function HeroSection() {
   const ref = useRef<HTMLElement>(null);
+  const [greetingIdx, setGreetingIdx] = useState(0);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
-  
-  const opacityText = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  const scaleText = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
 
-  // Mouse Tracking Orb Physics
+  const opacityHero = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
+  const scaleHero = useTransform(scrollYProgress, [0, 1], [1, 0.94]);
+
+  // Subtle ambient mouse spotlight on desktop
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const springX = useSpring(mouseX, { stiffness: 50, damping: 20 });
-  const springY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+  const springX = useSpring(mouseX, { stiffness: 40, damping: 25 });
+  const springY = useSpring(mouseY, { stiffness: 40, damping: 25 });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      // Calculate position relative to the center of the screen
-      const x = e.clientX - window.innerWidth / 2;
-      const y = e.clientY - window.innerHeight / 2;
-      mouseX.set(x);
-      mouseY.set(y);
+      mouseX.set(e.clientX - window.innerWidth / 2);
+      mouseY.set(e.clientY - window.innerHeight / 2);
     };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+
+    if (window.matchMedia("(pointer: fine)").matches) {
+      window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    }
+
+    const timer = setInterval(() => {
+      setGreetingIdx((prev) => (prev + 1) % INDIAN_GREETINGS.length);
+    }, 4000);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      clearInterval(timer);
+    };
   }, [mouseX, mouseY]);
 
-  const welcomes = [
-    { text: "Namaste", lang: "Hindi" },
-    { text: "Namaskaram", lang: "Telugu" },
-    { text: "Vanakkam", lang: "Tamil" },
-    { text: "Nômōskar", lang: "Bengali" },
-    { text: "Namaskar", lang: "Marathi" },
-    { text: "Namaskara", lang: "Kannada" },
-    { text: "Namaskaram", lang: "Malayalam" },
-    { text: "Kem Chho", lang: "Gujarati" },
-    { text: "Sat Sri Akal", lang: "Punjabi" },
-    { text: "Namaskar", lang: "Odia" },
-    { text: "Namaskar", lang: "Assamese" },
-    { text: "Namo Namah", lang: "Sanskrit" },
-    { text: "Adaab", lang: "Urdu" }
-  ];
-
-  const [welcomeIndex, setWelcomeIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setWelcomeIndex((prev) => (prev + 1) % welcomes.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const name = "JAMI ESWAR ANIL KUMAR";
-  const nameArray = name.split("");
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.2,
-      }
-    }
-  };
-  
-  const letterVariants = {
-    hidden: { opacity: 0, scale: 3, filter: "blur(10px)" },
-    visible: { 
-      opacity: 1, 
-      scale: 1, 
-      filter: "blur(0px)",
-      transition: { type: "spring" as const, stiffness: 150, damping: 15 }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { type: "spring" as const, stiffness: 100, damping: 15, delay: 1.5 }
-    }
-  };
-
   return (
-    <header className={styles.hero} id="hero" ref={ref}>
-      
-      {/* Interactive Glowing Orb */}
-      <motion.div 
-        className={styles.glowingOrb}
+    <section className={styles.hero} id="overview" ref={ref}>
+      {/* Precision Ambient Light Aura */}
+      <motion.div
+        className={styles.ambientAura}
         style={{ x: springX, y: springY }}
+        aria-hidden="true"
       />
-      <div className={styles.gridOverlay} />
+      
+      <div className={styles.gridCanvas} aria-hidden="true" />
 
-      <motion.div 
-        className={styles.content} 
-        style={{ opacity: opacityText, scale: scaleText }}
+      <motion.div
+        className={styles.content}
+        style={{ opacity: opacityHero, scale: scaleHero }}
       >
-        <div className={styles.welcomeWrapper}>
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={welcomeIndex}
-              className={styles.welcomeText}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.5 }}
-            >
-              {welcomes[welcomeIndex].text} <span className={styles.langLabel}>({welcomes[welcomeIndex].lang})</span>
-            </motion.span>
-          </AnimatePresence>
+        {/* Executive Identity Ribbon */}
+        <div className={styles.topRibbon}>
+          <div className={styles.executiveBadge}>
+            <span className="status-pulse" />
+            <span className={styles.badgeText}>Founder & Director @ Vyntyra Consultancy</span>
+          </div>
+
+          <div className={styles.greetingPill}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={greetingIdx}
+                className={styles.greetingInner}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.3 }}
+              >
+                <span className={styles.greetingScript}>{INDIAN_GREETINGS[greetingIdx].script}</span>
+                <span className={styles.greetingDivider}>•</span>
+                <span className={styles.greetingRoman}>{INDIAN_GREETINGS[greetingIdx].text}</span>
+                <span className={styles.greetingLang}>({INDIAN_GREETINGS[greetingIdx].lang})</span>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
 
-        <motion.p 
-          className={styles.eyebrow}
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-        >
-          Entrepreneur • Founder • Human Resources
-        </motion.p>
-        
-        <div className={styles.nameGlow}>
-          <motion.h1
-            className={styles.title}
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            {nameWords.map((word, wi) => (
-              <span
-                key={wi}
-                className={styles.wordGroup}
-                style={{ fontFamily: word.font }}
-              >
-                {word.text.split("").map((letter, li) => (
-                  <HoverLetter
-                    key={li}
-                    letter={letter}
-                    variants={letterVariants}
-                  />
-                ))}
-                {wi < nameWords.length - 1 && (
-                  <motion.span
-                    variants={letterVariants}
-                    style={{ display: "inline-block", whiteSpace: "pre" }}
-                  >
-                    {" "}
-                  </motion.span>
-                )}
-              </span>
-            ))}
-          </motion.h1>
+        {/* Commanding Corporate Display Name */}
+        <div className={styles.nameContainer}>
+          <h1 className={styles.executiveTitle}>
+            JAMI ESWAR ANIL KUMAR
+          </h1>
+          <div className={styles.titleUnderline} />
         </div>
-        
-        <motion.p 
-          className={styles.subtitle}
-          variants={itemVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          AI · Human Resources · Data Analytics · Marketing · Business Consultant
-        </motion.p>
-        
-        <motion.p 
-          className={styles.tagline}
-          variants={itemVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          Building human-centered organizations by marrying HR intelligence with AI-driven growth, marketing, and advisory services.
-        </motion.p>
-        
-        <motion.div 
-          className={styles.actions}
-          variants={itemVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.button 
-            className={styles.primaryBtn}
-            whileTap={{ scale: 0.96 }}
-            onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
-          >
-            <span className={styles.primaryBtnInner}>
-              Discover More
-              <i className="fa-solid fa-arrow-down" style={{ fontSize: "0.85em" }} />
-            </span>
-          </motion.button>
-          <motion.a 
-            className={styles.outlineBtn} 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            href="mailto:jamianil37@gmail.com"
-          >
-            Get in touch
-          </motion.a>
-        </motion.div>
+
+        {/* Corporate Strategic Subtitle */}
+        <p className={styles.strategicRole}>
+          Architecting Enterprise AI & Human Capital Strategy
+        </p>
+
+        {/* Executive Value Proposition */}
+        <p className={styles.thesisStatement}>
+          Bridging deep Artificial Intelligence architecture with human-centered organizational intelligence. 
+          Advising high-growth ventures, optimizing enterprise talent retention, and building institutional capacity.
+        </p>
+
+        {/* Dual Primary & Secondary Action Suite */}
+        <div className={styles.actionRow}>
+          <a href="#contact" className={styles.primaryAction}>
+            <span>Initiate Strategic Advisory</span>
+            <i className="fa-solid fa-arrow-right" />
+          </a>
+          <a href="#about" className={styles.secondaryAction}>
+            <span>Explore Executive Dossier</span>
+            <i className="fa-regular fa-id-badge" />
+          </a>
+        </div>
+
+        {/* Executive Impact Metrics Bento Strip */}
+        <div className={styles.metricsGrid}>
+          {EXECUTIVE_METRICS.map((metric, i) => (
+            <div key={i} className={styles.metricCard}>
+              <span className={styles.metricValue}>{metric.value}</span>
+              <span className={styles.metricLabel}>{metric.label}</span>
+              <span className={styles.metricMeta}>{metric.meta}</span>
+            </div>
+          ))}
+        </div>
       </motion.div>
-    </header>
+    </section>
   );
 }

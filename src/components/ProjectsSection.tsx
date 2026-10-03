@@ -4,77 +4,108 @@ import styles from "./ProjectsSection.module.css";
 import SectionHeading from "./SectionHeading";
 import { motion } from "framer-motion";
 
-const projectsData = [
+const VENTURES_AND_CASE_STUDIES = [
   {
-    title: "Accenture Nordics Job Simulation",
-    description: "AI-enabled HR consulting sprint with inclusive marketing narratives.",
-    tags: ["AI", "HR Analytics"],
+    title: "Vyntyra Consultancy Services",
+    role: "Founder & Executive Director",
+    timeline: "2024 – Present",
+    tagline: "Corporate Advisory & AI-Driven Organizational Intelligence",
+    description: "Architected end-to-end strategic advisory operations helping emerging ventures and institutions implement predictive AI systems and human-first talent retention architectures.",
+    impact: "Over 500 emerging leaders mentored; proprietary HR analytics & leadership curriculums deployed across India.",
+    tags: ["Enterprise Advisory", "AI Strategy", "Talent Governance", "Venture Scaling"],
+    icon: "fa-solid fa-building-columns",
+    featured: true,
   },
   {
-    title: "Human-First Consultancy Sprint",
-    description: "People analytics rollout for founders balancing empathy and efficiency.",
-    tags: ["Consultancy", "Culture"],
+    title: "Accenture Nordics Workforce Advisory Simulation",
+    role: "Strategy & People Analytics Practice",
+    timeline: "Accredited Simulation",
+    tagline: "AI-Enabled Organizational Restructuring & Change Management",
+    description: "Evaluated enterprise workforce attrition signals, mapped human-centered retention interventions, and drafted inclusive AI integration strategies for regional business units.",
+    impact: "Synthesized executive briefing deck and algorithmic retention roadmap adhering to global consulting standards.",
+    tags: ["People Analytics", "Change Management", "Forage Verified", "Consulting"],
+    icon: "fa-solid fa-chart-pie",
+    featured: false,
   },
   {
-    title: "Employer Brand Campaigns",
-    description: "Scaled LinkedIn content strategy and ad suites for APAC clients.",
-    tags: ["Marketing", "LinkedIn"],
+    title: "Vyntyra Academy Technical Cohorts",
+    role: "Lead Executive Instructor",
+    timeline: "2025 – Present",
+    tagline: "National Technical Incubation & Career Acceleration",
+    description: "Directed nationwide virtual and on-campus workshops spanning Generative AI prompt engineering, Power BI business dashboards, and full-stack architecture.",
+    impact: "Trained collegiate and early-career talent, establishing recognized campus ambassador networks.",
+    tags: ["Academy Leadership", "Prompt Engineering", "Power BI", "Ecosystem Growth"],
+    icon: "fa-solid fa-chalkboard-user",
+    featured: false,
+  },
+  {
+    title: "APAC Enterprise Brand & Talent Acquisition Campaigns",
+    role: "Campaign Architect & Ads Specialist",
+    timeline: "2025",
+    tagline: "High-Performance B2B Media Strategy & Employer Branding",
+    description: "Orchestrated targeted LinkedIn marketing campaigns and candidate pipeline suites, optimizing conversion funnels and establishing executive digital presence.",
+    impact: "Achieved sustained high click-through rates and scaled enterprise talent pipelines across target geographies.",
+    tags: ["B2B Acquisition", "LinkedIn Ads", "Employer Brand", "Performance Media"],
+    icon: "fa-solid fa-bullhorn",
+    featured: false,
   },
 ];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
-    }
-  }
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.95 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    scale: 1,
-    transition: { type: "spring" as const, stiffness: 100, damping: 15 }
-  }
-};
 
 export default function ProjectsSection() {
   return (
     <section className={styles.projects} id="projects">
       <div className={styles.container}>
-        <SectionHeading title="Projects" subtitle="Accenture Nordics Job Simulation & more." />
-        
-        <motion.div 
-          className={styles.carousel}
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          {projectsData.map((project, index) => (
-            <motion.article 
+        <SectionHeading
+          title="Ventures & Strategic Initiatives"
+          subtitle="Enterprise initiatives, consulting simulations, and high-impact institutional engagements."
+        />
+
+        <div className={styles.grid}>
+          {VENTURES_AND_CASE_STUDIES.map((item, index) => (
+            <motion.article
               key={index}
-              className={styles.card}
-              variants={itemVariants}
-              whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+              className={`${styles.card} ${item.featured ? styles.cardFeatured : ""}`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.4, delay: index * 0.08 }}
             >
-              <div className={styles.cardInner}>
-                <h3 className={styles.title}>{project.title}</h3>
-                <p className={styles.description}>{project.description}</p>
-                <div className={styles.tags}>
-                  {project.tags.map((tag, tIdx) => (
-                    <span key={tIdx} className={styles.tag}>{tag}</span>
+              <div className={styles.cardHeader}>
+                <div className={styles.iconCircle}>
+                  <i className={item.icon} />
+                </div>
+                <div className={styles.headerMeta}>
+                  <span className={styles.roleTag}>{item.role}</span>
+                  <span className={styles.timelineTag}>{item.timeline}</span>
+                </div>
+              </div>
+
+              <div className={styles.cardBody}>
+                <h3 className={styles.ventureTitle}>{item.title}</h3>
+                <span className={styles.tagline}>{item.tagline}</span>
+                <p className={styles.description}>{item.description}</p>
+
+                <div className={styles.impactBox}>
+                  <i className="fa-solid fa-arrow-trend-up" />
+                  <div>
+                    <strong>Demonstrated Impact:</strong>
+                    <span>{item.impact}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.cardFooter}>
+                <div className={styles.tagCluster}>
+                  {item.tags.map((tag, tIdx) => (
+                    <span key={tIdx} className={styles.tag}>
+                      {tag}
+                    </span>
                   ))}
                 </div>
               </div>
             </motion.article>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

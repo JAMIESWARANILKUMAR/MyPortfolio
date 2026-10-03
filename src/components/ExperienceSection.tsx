@@ -5,36 +5,51 @@ import SectionHeading from "./SectionHeading";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
-const experienceData = [
+const LEADERSHIP_MILESTONES = [
   {
-    title: "Entrepreneur & Founder",
-    subtitle: "Vyntyra Consultancy Services",
-    details: "Spearheaded strategic planning, business development, and innovative technology implementation to optimize operations and secure partnerships.",
-    date: "Sep 2024 - Present"
+    title: "Founder & Executive Director",
+    organization: "Vyntyra Consultancy Services",
+    timeline: "Sep 2024 – Present",
+    scope: "Enterprise Strategy & Executive Governance",
+    details: "Directing strategic roadmaps, AI-enabled organizational intelligence frameworks, and institutional client partnerships. Leading Vyntyra Academy with nationwide workshop footprints.",
+    tags: ["Executive Governance", "AI Architecture", "P&L Management", "Strategic Advisory"],
+    highlight: true,
   },
   {
     title: "Google Campus Ambassador",
-    subtitle: "Google Gemini",
-    details: "Representing Google Gemini as an on-site intern in Srikakulam, Andhra Pradesh.",
-    date: "May 2026 - Present"
+    organization: "Google Gemini & Dev Ecosystem",
+    timeline: "May 2026 – Present",
+    scope: "AI Evangelism & Tech Leadership",
+    details: "Representing Google Gemini across institutional developer cohorts; hosting hands-on seminars on Generative AI, prompt engineering, and next-generation model integration.",
+    tags: ["Google Devs", "Gemini Ecosystem", "Campus Leadership", "AI Evangelism"],
+    highlight: true,
   },
   {
     title: "Professional Instructor",
-    subtitle: "Udemy",
-    details: "Serving as a Professional Instructor and participating in the Instructor Rookery apprenticeship.",
-    date: "May 2025 - Present"
+    organization: "Udemy & Instructor Rookery",
+    timeline: "May 2025 – Present",
+    scope: "Curriculum Architecture & Global Learning",
+    details: "Authoring digital courses on business intelligence, decision science, and modern technology workflows. Selected for the selective Instructor Rookery apprenticeship.",
+    tags: ["E-Learning", "Business Analytics", "Curriculum Design", "Instruction"],
+    highlight: false,
   },
   {
-    title: "Student Partner",
-    subtitle: "Internshala",
-    details: "Engaged in multiple concurrent Internshala Student Partner programs.",
-    date: "Jul 2025 - Present"
+    title: "Campus Lead & Student Partner",
+    organization: "Internshala",
+    timeline: "Jul 2025 – Present",
+    scope: "Career Readiness & Community Growth",
+    details: "Accelerating undergraduate career orientation, industry internships, and professional development programs across university networks.",
+    tags: ["Talent Sourcing", "Career Advisory", "Ecosystem Scaling"],
+    highlight: false,
   },
   {
-    title: "LinkedIn Ads Manager",
-    subtitle: "LinkedIn (Freelance)",
-    details: "Developed and managed impactful LinkedIn marketing ads, significantly increasing CTR and conversions.",
-    date: "Jan 2025 - Jun 2025"
+    title: "B2B Performance Media Specialist",
+    organization: "LinkedIn Ad Solutions (Freelance Advisory)",
+    timeline: "Jan 2025 – Jun 2025",
+    scope: "Growth Marketing & Brand Acquisition",
+    details: "Designed high-ROI advertising campaigns, formulated employer brand narratives, and optimized enterprise lead generation for corporate accounts.",
+    tags: ["Performance Marketing", "Employer Branding", "B2B Funnels"],
+    highlight: false,
   },
 ];
 
@@ -42,7 +57,7 @@ export default function ExperienceSection() {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start center", "end center"]
+    offset: ["start center", "end center"],
   });
 
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
@@ -50,33 +65,48 @@ export default function ExperienceSection() {
   return (
     <section className={styles.experience} id="experience">
       <div className={styles.container}>
-        <SectionHeading title="Experience" subtitle="A timeline of my professional journey." />
-        
+        <SectionHeading
+          title="Leadership & Milestone Track"
+          subtitle="Verifiable institutional roles, executive leadership tenures, and advisory milestones."
+        />
+
         <div className={styles.timelineContainer} ref={containerRef}>
           <motion.div className={styles.timelineLine} style={{ height: lineHeight }} />
           <div className={styles.timelineTrack} />
 
-          {experienceData.map((item, index) => (
+          {LEADERSHIP_MILESTONES.map((item, index) => (
             <div key={index} className={styles.timelineItem}>
-              <motion.div 
-                className={styles.timelineDot}
+              <motion.div
+                className={`${styles.timelineDot} ${item.highlight ? styles.dotHighlight : ""}`}
                 initial={{ scale: 0, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.4, delay: 0.2 }}
+                transition={{ duration: 0.3, delay: 0.15 }}
               />
-              <motion.div 
-                className={styles.timelineContent}
-                initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ type: "spring", stiffness: 100, damping: 15, delay: 0.1 }}
-                whileHover={{ scale: 1.02 }}
+
+              <motion.div
+                className={`${styles.timelineContent} ${item.highlight ? styles.contentHighlight : ""}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.35, delay: 0.1 }}
               >
-                <div className={styles.dateBadge}>{item.date}</div>
-                <h3 className={styles.title}>{item.title}</h3>
-                <p className={styles.subtitle}>{item.subtitle}</p>
-                <p className={styles.details}>{item.details}</p>
+                <div className={styles.cardHeader}>
+                  <span className={styles.dateBadge}>{item.timeline}</span>
+                  <span className={styles.scopeTag}>{item.scope}</span>
+                </div>
+
+                <h3 className={styles.roleTitle}>{item.title}</h3>
+                <h4 className={styles.orgName}>{item.organization}</h4>
+                <p className={styles.detailsText}>{item.details}</p>
+
+                <div className={styles.tagStrip}>
+                  {item.tags.map((tag, tIdx) => (
+                    <span key={tIdx} className={styles.tag}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </motion.div>
             </div>
           ))}

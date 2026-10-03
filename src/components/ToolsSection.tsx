@@ -3,70 +3,40 @@
 import styles from "./ToolsSection.module.css";
 import SectionHeading from "./SectionHeading";
 
-const toolsData = [
-  { name: "HTML", icon: "fab fa-html5" },
-  { name: "CSS", icon: "fab fa-css3-alt" },
-  { name: "React", icon: "fab fa-react" },
-  { name: "Next.js", icon: "fa-brands fa-js" },
-  { name: "Git", icon: "fab fa-git-alt" },
-  { name: "GitHub", icon: "fab fa-github" },
-  { name: "GitHub Pages", icon: "fa-solid fa-server" },
-  { name: "Firebase", icon: "fa-solid fa-fire" },
-  { name: "Figma", icon: "fab fa-figma" },
-  { name: "Android Studio", icon: "fab fa-android" },
-  { name: "Google Cloud", icon: "fa-solid fa-cloud" },
+const TOOLING_ECOSYSTEM = [
+  { name: "React", category: "Full-Stack Web", icon: "fa-brands fa-react" },
+  { name: "Next.js", category: "Production Framework", icon: "fa-solid fa-code" },
+  { name: "Google Cloud", category: "Cloud & AI Infra", icon: "fa-solid fa-cloud" },
+  { name: "Firebase", category: "Backend Services", icon: "fa-solid fa-fire" },
+  { name: "Figma", category: "UI/UX & Product Design", icon: "fa-brands fa-figma" },
+  { name: "Android Studio", category: "Mobile Engineering", icon: "fa-brands fa-android" },
+  { name: "Power BI", category: "Business Intelligence", icon: "fa-solid fa-chart-simple" },
+  { name: "Advanced Excel", category: "Decision Modeling", icon: "fa-solid fa-file-excel" },
+  { name: "Git & GitHub", category: "Version Control", icon: "fa-brands fa-github" },
+  { name: "Python / AI", category: "Machine Learning", icon: "fa-brands fa-python" },
 ];
 
 export default function ToolsSection() {
-  // Duplicate tools array for seamless infinite scroll
-  const toolsList = [...toolsData, ...toolsData];
-  const toolsListReversed = [...toolsData].reverse();
-  const toolsListReversedDouble = [...toolsListReversed, ...toolsListReversed];
-
   return (
     <section className={styles.tools} id="tools">
       <div className={styles.container}>
-        <SectionHeading title="Tools on Replay" subtitle="1 year of focused expertise across this stack." />
-        
-        <div className={styles.marqueeContainer}>
-          <div className={styles.marqueeWrapper}>
-            <div className={styles.track}>
-              {toolsList.map((tool, index) => (
-                <div key={index} className={styles.chip}>
-                  <i className={tool.icon}></i>
-                  <span>{tool.name}</span>
-                </div>
-              ))}
-            </div>
-            {/* Clone track for infinite scrolling */}
-            <div className={styles.track} aria-hidden="true">
-              {toolsList.map((tool, index) => (
-                <div key={index} className={styles.chip}>
-                  <i className={tool.icon}></i>
-                  <span>{tool.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+        <SectionHeading
+          title="Technology & Tooling Stack"
+          subtitle="Enterprise technologies deployed across machine learning, cloud infrastructure, and business automation."
+        />
 
-          <div className={styles.marqueeWrapper} style={{ marginTop: "1.5rem" }}>
-            <div className={`${styles.track} ${styles.trackReverse}`}>
-              {toolsListReversedDouble.map((tool, index) => (
-                <div key={index} className={styles.chip}>
-                  <i className={tool.icon}></i>
-                  <span>{tool.name}</span>
-                </div>
-              ))}
+        <div className={styles.grid}>
+          {TOOLING_ECOSYSTEM.map((tool, index) => (
+            <div key={index} className={styles.toolCard}>
+              <div className={styles.iconBox}>
+                <i className={tool.icon} />
+              </div>
+              <div className={styles.toolInfo}>
+                <span className={styles.toolName}>{tool.name}</span>
+                <span className={styles.toolCategory}>{tool.category}</span>
+              </div>
             </div>
-             <div className={`${styles.track} ${styles.trackReverse}`} aria-hidden="true">
-              {toolsListReversedDouble.map((tool, index) => (
-                <div key={index} className={styles.chip}>
-                  <i className={tool.icon}></i>
-                  <span>{tool.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

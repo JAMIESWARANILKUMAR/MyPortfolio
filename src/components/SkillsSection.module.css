@@ -1,159 +1,227 @@
 .skills {
+  padding: var(--section-padding-desktop);
   position: relative;
-  padding: 6rem 4.5rem;
+  background: transparent;
   overflow: hidden;
-}
-
-@media (max-width: 768px) {
-  .skills {
-    padding: 4rem 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .skills {
-    padding: 3rem 1rem;
-  }
-}
-
-/* Infinite Marquee */
-.marqueeContainer {
-  position: absolute;
-  top: 10%;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.15;
-}
-
-.marqueeTrack {
-  display: flex;
-  width: fit-content;
-}
-
-.marqueeText {
-  font-family: 'Orbitron', sans-serif;
-  font-size: clamp(6rem, 15vw, 15rem);
-  font-weight: 900;
-  text-transform: uppercase;
-  color: transparent;
-  -webkit-text-stroke: 2px var(--accent-cyan);
-  padding-right: 50px;
 }
 
 .container {
-  position: relative;
-  max-width: 1200px;
+  width: 100%;
+  max-width: var(--max-content-width);
   margin: 0 auto;
-  z-index: 10;
+  padding: 0 1.5rem;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-top: 3rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 3.5rem;
 }
 
-/* Hologram Card */
-.perspectiveWrapper {
-  perspective: 1000px;
-}
-
-.hologramCard {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  padding: 2.5rem;
+.capabilityCard {
+  background: var(--gradient-card);
+  border: 1px solid var(--border-subtle);
   border-radius: 24px;
-  background: rgba(10, 14, 23, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(89, 229, 255, 0.05);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  transform-style: preserve-3d;
-  transition: border-color 0.3s ease;
+  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5);
+  transition: all 0.25s ease;
+  position: relative;
 }
 
-@media (max-width: 480px) {
-  .hologramCard {
-    padding: 1.5rem;
+.capabilityCard:hover {
+  transform: translateY(-3px);
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.iconCircle {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: var(--accent-cyan);
+  flex-shrink: 0;
+}
+
+.accent-indigo .iconCircle {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.25);
+  color: var(--accent-indigo);
+}
+
+.accent-emerald .iconCircle {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.25);
+  color: var(--accent-emerald);
+}
+
+.accent-purple .iconCircle {
+  background: rgba(168, 85, 247, 0.1);
+  border-color: rgba(168, 85, 247, 0.25);
+  color: var(--accent-purple);
+}
+
+.headerMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.domainBadge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.domainTitle {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+
+.summaryText {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.competencyList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.competencyItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.competencyName {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.dotIndicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  flex-shrink: 0;
+}
+
+.accent-indigo .dotIndicator {
+  background: var(--accent-indigo);
+}
+
+.accent-emerald .dotIndicator {
+  background: var(--accent-emerald);
+}
+
+.accent-purple .dotIndicator {
+  background: var(--accent-purple);
+}
+
+.levelTag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-subtle);
+  white-space: nowrap;
+}
+
+.tagStrip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.tagPill {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+}
+
+/* Smartphone Optimization */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.15rem;
   }
 }
 
-.hologramCard:hover {
-  border-color: rgba(89, 229, 255, 0.5);
-}
+@media (max-width: 640px) {
+  .skills {
+    padding: var(--section-padding-mobile);
+  }
 
-.hologramGlare {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.1), transparent 60%);
-  pointer-events: none;
-  border-radius: inherit;
-  transform: translateZ(1px);
-}
+  .container {
+    padding: 0 1.15rem;
+  }
 
-.cardContent {
-  position: relative;
-  z-index: 2;
-  transform-style: preserve-3d;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+  .grid {
+    margin-top: 2.25rem;
+  }
 
-.categoryTitle {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 1.5rem;
-  font-family: 'Space Grotesk', sans-serif;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-}
+  .capabilityCard {
+    padding: 1.35rem;
+    gap: 1.15rem;
+    border-radius: 18px;
+  }
 
-.skillsList {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 2rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  flex-grow: 1;
-}
+  .iconCircle {
+    width: 42px;
+    height: 42px;
+    font-size: 1.1rem;
+  }
 
-.skillsList li {
-  color: var(--text-sheen);
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-}
+  .domainTitle {
+    font-size: 1.05rem;
+  }
 
-.skillsList li::before {
-  content: '→';
-  color: var(--accent-cyan);
-  margin-right: 0.75rem;
-  font-weight: bold;
-}
+  .summaryText {
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
 
-.badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: auto;
-}
-
-.badge {
-  background: rgba(183, 107, 240, 0.1);
-  border: 1px solid rgba(183, 107, 240, 0.3);
-  color: var(--accent-purple);
-  padding: 0.4rem 1rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  box-shadow: 0 0 10px rgba(183, 107, 240, 0.2);
+  .competencyName {
+    font-size: 0.82rem;
+  }
 }

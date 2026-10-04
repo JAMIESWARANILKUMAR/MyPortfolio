@@ -107,17 +107,22 @@
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  padding: 0.3rem 0.5rem;
+  height: 42px;
+  padding: 0 0.45rem;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 999px;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  box-sizing: border-box;
 }
 
 .navLink {
   position: relative;
-  padding: 0.45rem 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 0.85rem;
   font-family: var(--font-heading);
   font-size: 0.82rem;
   font-weight: 600;
@@ -151,6 +156,7 @@
   align-items: center;
   gap: 0.65rem;
   flex-shrink: 0;
+  height: 42px;
 }
 
 /* Executive AI Assistant Header Button */
@@ -158,13 +164,14 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.35rem 0.85rem 0.35rem 0.45rem;
+  height: 40px;
+  padding: 0 0.85rem 0 0.45rem;
   background: rgba(13, 20, 36, 0.7);
   border: 1px solid rgba(56, 189, 248, 0.35);
   border-radius: 999px;
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  min-height: 40px;
+  box-sizing: border-box;
   touch-action: manipulation;
   color: var(--text-primary);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
@@ -223,7 +230,8 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.45rem 0.85rem;
+  height: 40px;
+  padding: 0 0.85rem;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
@@ -233,7 +241,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  min-height: 40px;
+  box-sizing: border-box;
   touch-action: manipulation;
 }
 
@@ -366,8 +374,10 @@
 .consultBtn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 0.45rem 1rem;
+  height: 40px;
+  padding: 0 1.15rem;
   border-radius: 12px;
   background: var(--gradient-executive);
   color: #04060a;
@@ -376,7 +386,7 @@
   font-weight: 800;
   letter-spacing: -0.01em;
   text-decoration: none;
-  min-height: 40px;
+  box-sizing: border-box;
   box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   white-space: nowrap;

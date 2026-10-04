@@ -1,0 +1,404 @@
+/* Welcome Screen / Splash Preloader */
+.welcomeBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: #03060c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  overflow: hidden;
+}
+
+.ambientGlow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.18) 0%, rgba(99, 102, 241, 0.1) 40%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.gridOverlay {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+  pointer-events: none;
+}
+
+.welcomeCard {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 480px;
+  background: linear-gradient(135deg, rgba(13, 20, 36, 0.95) 0%, rgba(7, 11, 20, 0.98) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 28px;
+  padding: 2.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.8), 0 0 40px -10px rgba(56, 189, 248, 0.25);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+/* IST Live Time Ribbon */
+.istRibbon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.istLiveDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.istRibbon i {
+  color: #38bdf8;
+  font-size: 0.72rem;
+}
+
+.istTimeText {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.istDivider {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 0.6rem;
+}
+
+.istContextText {
+  color: #34d399;
+  font-weight: 600;
+}
+
+/* Creative Animated Logo & Feddy Avatar Stage */
+.creativeAvatarStage {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem 0;
+}
+
+/* Outer Celestial Rotating Ring */
+.orbitalRingOuter {
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(56, 189, 248, 0.55);
+  animation: rotate-clockwise 14s linear infinite;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+}
+
+/* Inner Counter-Rotating Holographic Ring */
+.orbitalRingInner {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px solid transparent;
+  border-top-color: #38bdf8;
+  border-right-color: #f59e0b;
+  animation: rotate-counter-clockwise 8s linear infinite;
+}
+
+@keyframes rotate-clockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-counter-clockwise {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.avatarHalo {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(245, 158, 11, 0.1) 50%, transparent 75%);
+  filter: blur(12px);
+  animation: halo-pulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes halo-pulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+/* Glass Podium Container */
+.avatarContainer {
+  position: relative;
+  width: 104px;
+  height: 104px;
+  border-radius: 26px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(13, 20, 36, 0.9) 100%);
+  border: 1.5px solid rgba(56, 189, 248, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.feddyAvatarImg {
+  width: 82px;
+  height: 82px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
+  transition: transform 0.3s ease;
+}
+
+/* Holographic Scanner Beam */
+.scannerBeam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, #38bdf8 50%, transparent 100%);
+  box-shadow: 0 0 12px #38bdf8;
+  animation: scan-vertical 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes scan-vertical {
+  0% {
+    top: 5%;
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    top: 92%;
+    opacity: 0.3;
+  }
+}
+
+/* Floating Monogram Badge */
+.floatingMonogramBadge {
+  position: absolute;
+  bottom: -6px;
+  right: -8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.6rem;
+  background: var(--gradient-executive);
+  color: #04060a;
+  border-radius: 8px;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.floatingMonogramBadge i {
+  font-size: 0.62rem;
+}
+
+/* Dynamic Greeting Text */
+.greetingTextBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.greetingHeaderRow {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.greetingIcon {
+  color: #f59e0b;
+  font-size: 1.25rem;
+}
+
+.greetingTitle {
+  font-family: var(--font-heading);
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.welcomeSubtitle {
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.executiveName {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  margin: 0.2rem 0 0;
+  background: linear-gradient(135deg, #ffffff 40%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.executiveRole {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Progress Bar */
+.progressContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.progressBarTrack {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progressBarFill {
+  height: 100%;
+  background: var(--gradient-executive);
+  border-radius: 999px;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+  transition: width 0.1s linear;
+}
+
+.progressMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.statusTickerText {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--accent-cyan);
+}
+
+.percentText {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Skip / Enter Action Button */
+.skipBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.55rem 1.25rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 38px;
+}
+
+.skipBtn:hover {
+  background: rgba(56, 189, 248, 0.18);
+  border-color: rgba(56, 189, 248, 0.5);
+  transform: translateY(-1px);
+}
+
+.skipBtn i {
+  font-size: 0.72rem;
+  transition: transform 0.2s ease;
+}
+
+.skipBtn:hover i {
+  transform: translateX(3px);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .welcomeCard {
+    padding: 1.75rem 1.25rem;
+    gap: 1.25rem;
+  }
+
+  .creativeAvatarStage {
+    width: 120px;
+    height: 120px;
+  }
+
+  .avatarContainer {
+    width: 90px;
+    height: 90px;
+  }
+
+  .feddyAvatarImg {
+    width: 72px;
+    height: 72px;
+  }
+
+  .greetingTitle {
+    font-size: 1.35rem;
+  }
+
+  .executiveName {
+    font-size: 1.1rem;
+  }
+}

@@ -3,6 +3,7 @@ import "./globals.css";
 import Navigation from "@/components/Navigation";
 import CustomCursor from "@/components/CustomCursor";
 import FeddyChatbot from "@/components/FeddyChatbot";
+import WelcomeScreen from "@/components/WelcomeScreen";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -76,6 +77,7 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/Profile.webp" />
       </head>
       <body>
+        <WelcomeScreen />
         <CustomCursor />
         <Navigation />
         {children}

@@ -662,7 +662,11 @@
 }
 
 /* Responsive Handling */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .floatingTooltip {
+    display: none !important;
+  }
+
   .modalBackdrop {
     padding: 0;
     align-items: flex-end;
@@ -682,7 +686,7 @@
   }
 
   .floatingAvatarBtn {
-    width: 54px;
-    height: 54px;
+    width: 52px;
+    height: 52px;
   }
 }

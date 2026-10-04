@@ -418,76 +418,121 @@
 }
 
 /* Multi-Device Responsiveness (ISO Standard) */
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
   .metricsGrid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 840px) {
   .hero {
-    padding: calc(60px + 2rem) 1.15rem 3.5rem;
+    padding: calc(62px + 2rem) 1.15rem 4rem;
     min-height: auto;
   }
 
   .topStatusStrip {
     flex-direction: column;
+    align-items: center;
     gap: 0.5rem;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.15rem;
+    width: 100%;
   }
 
-  .presenceText {
-    font-size: 0.7rem;
-  }
-
+  .presenceChip,
   .timezoneChip {
-    font-size: 0.7rem;
+    width: fit-content;
+    max-width: 100%;
+    font-size: 0.72rem;
+    height: auto;
+    min-height: 34px;
+    padding: 0.35rem 0.85rem;
   }
 
   .greetingPill {
-    font-size: 0.78rem;
-    padding: 0.35rem 0.85rem;
+    font-size: 0.8rem;
+    height: auto;
+    min-height: 34px;
+    padding: 0.35rem 0.95rem;
     margin-bottom: 1.25rem;
+    max-width: 100%;
   }
 
   .executiveTitle {
-    font-size: clamp(1.75rem, 8.5vw, 2.75rem);
+    font-size: clamp(1.85rem, 8.5vw, 2.85rem);
     letter-spacing: -0.02em;
+    line-height: 1.12;
+  }
+
+  .titleUnderline {
+    width: 60px;
+    margin-top: 0.75rem;
   }
 
   .strategicRole {
-    font-size: 0.98rem;
-    line-height: 1.4;
+    font-size: clamp(0.95rem, 3.8vw, 1.15rem);
+    line-height: 1.45;
+    text-align: center;
+    max-width: 100%;
   }
 
   .thesisStatement {
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     line-height: 1.65;
-    margin-bottom: 2rem;
+    margin-bottom: 2.25rem;
+    text-align: center;
+    max-width: 100%;
   }
 
   .actionRow {
     flex-direction: column;
+    align-items: center;
     gap: 0.75rem;
-    margin-bottom: 2.75rem;
+    margin-bottom: 3rem;
+    width: 100%;
+    max-width: 380px;
   }
 
   .primaryAction, 
   .secondaryAction,
   .tertiaryAction {
     width: 100%;
-    min-height: 48px;
+    height: 48px;
     font-size: 0.92rem;
-    padding: 0.85rem 1.5rem;
+    padding: 0 1.5rem;
+    justify-content: center;
+    text-align: center;
   }
 
   .metricsGrid {
     grid-template-columns: 1fr;
     gap: 0.85rem;
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
   }
 
   .metricCard {
-    padding: 1.25rem;
+    padding: 1.35rem;
+    border-radius: 18px;
   }
 }
+
+@media (max-width: 480px) {
+  .hero {
+    padding: calc(60px + 1.5rem) 1rem 3.5rem;
+  }
+
+  .executiveTitle {
+    font-size: clamp(1.65rem, 8vw, 2.35rem);
+  }
+
+  .actionRow {
+    max-width: 100%;
+  }
+
+  .metricsGrid {
+    max-width: 100%;
+  }
+}
+

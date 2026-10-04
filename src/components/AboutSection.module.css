@@ -401,7 +401,7 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .about {
     padding: var(--section-padding-mobile);
   }
@@ -414,13 +414,19 @@
     gap: 2.25rem;
   }
 
+  .portraitColumn {
+    max-width: 360px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
   .portraitCard {
     padding: 1rem;
-    border-radius: 22px;
+    border-radius: 20px;
   }
 
   .imageContainer {
-    height: 350px;
+    height: 300px;
     border-radius: 16px;
   }
 
@@ -439,7 +445,7 @@
   }
 
   .pillarCard {
-    padding: 1.25rem;
+    padding: 1.15rem;
     gap: 0.75rem;
   }
 
@@ -469,6 +475,7 @@
   .explorePedigreeBtn,
   .requestBriefingBtn {
     width: 100%;
+    min-height: 48px;
     justify-content: center;
   }
 }

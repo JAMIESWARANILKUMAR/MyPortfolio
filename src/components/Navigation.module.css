@@ -704,53 +704,66 @@
 }
 
 /* Responsive Breakpoints */
-@media (max-width: 1200px) {
+@media (max-width: 1080px) {
   .desktopNav {
-    display: none;
+    display: none !important;
+  }
+  .consultBtn {
+    display: none !important;
+  }
+  .localeWrapper {
+    display: none !important;
+  }
+  .executiveAIBtn {
+    display: none !important;
   }
   .menuToggle {
-    display: flex;
+    display: flex !important;
   }
-}
-
-@media (max-width: 768px) {
-  .brandRole {
-    display: none;
-  }
-}
-
-@media (max-width: 640px) {
   .header {
-    height: 60px;
+    height: 62px;
   }
   .headerScrolled {
     height: 58px;
   }
   .mobileDrawer {
-    top: 60px;
+    top: 62px;
+  }
+  .actions {
+    gap: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .brandRole {
+    display: none !important;
   }
   .brandName {
-    font-size: 0.85rem;
+    font-size: 0.88rem;
+  }
+  .brandMonogram {
+    width: 36px;
+    height: 36px;
+    font-size: 0.82rem;
+  }
+  .container {
+    padding: 0 1.15rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .brandName {
+    font-size: 0.82rem;
   }
   .brandMonogram {
     width: 34px;
     height: 34px;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
   }
-  .consultBtn {
-    display: none;
-  }
-  .localeText {
-    display: none;
-  }
-  .localeButton {
-    padding: 0.45rem 0.65rem;
-    min-height: 40px;
-  }
-  .aiBtnText {
-    display: none;
-  }
-  .executiveAIBtn {
-    padding: 0.35rem 0.5rem;
+  .menuToggle {
+    width: 40px;
+    height: 40px;
+    padding: 8px;
   }
 }
+

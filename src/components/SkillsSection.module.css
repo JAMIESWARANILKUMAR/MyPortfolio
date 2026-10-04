@@ -12,31 +12,87 @@
   padding: 0 1.5rem;
 }
 
+/* Filter Bar */
+.filterBar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+  scrollbar-width: none;
+}
+
+.filterBar::-webkit-scrollbar {
+  display: none;
+}
+
+.filterBtn {
+  position: relative;
+  padding: 0.5rem 1.15rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-family: var(--font-heading);
+  font-size: 0.84rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+  min-height: 40px;
+}
+
+.filterBtn:hover {
+  color: #ffffff;
+}
+
+.filterBtnActive {
+  color: #ffffff;
+  font-weight: 600;
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.activeFilterPill {
+  position: absolute;
+  inset: 0;
+  background: rgba(56, 189, 248, 0.12);
+  border-radius: 999px;
+  z-index: -1;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Matrix Grid */
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
-  margin-top: 3.5rem;
 }
 
 .capabilityCard {
   background: var(--gradient-card);
   border: 1px solid var(--border-subtle);
   border-radius: 24px;
-  padding: 2rem;
+  padding: 2.15rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1.35rem;
   backdrop-filter: blur(20px);
-  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5);
-  transition: all 0.25s ease;
+  box-shadow: 
+    0 15px 35px -10px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
 }
 
 .capabilityCard:hover {
   transform: translateY(-3px);
   border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 
+    0 20px 45px -10px rgba(0, 0, 0, 0.7),
+    0 0 30px rgba(56, 189, 248, 0.08);
 }
 
 .cardHeader {
@@ -94,7 +150,7 @@
 
 .domainTitle {
   font-family: var(--font-heading);
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: #ffffff;
   letter-spacing: -0.015em;
@@ -107,16 +163,56 @@
   line-height: 1.65;
 }
 
+.applicationBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.82rem;
+}
+
+.applicationBox i {
+  color: var(--accent-cyan);
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.applicationBox div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.applicationBox strong {
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+}
+
+.applicationBox span {
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
 .competencyList {
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
-  padding: 1rem 0;
+  gap: 0.85rem;
+  padding: 1.15rem 0;
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
 }
 
 .competencyItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.competencyHeaderRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -157,10 +253,36 @@
   font-size: 0.72rem;
   color: var(--text-muted);
   background: rgba(255, 255, 255, 0.04);
-  padding: 0.15rem 0.5rem;
+  padding: 0.15rem 0.55rem;
   border-radius: 6px;
   border: 1px solid var(--border-subtle);
   white-space: nowrap;
+}
+
+.progressBarBg {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progressBarFill {
+  height: 100%;
+  background: var(--gradient-executive);
+  border-radius: 999px;
+}
+
+.accent-indigo .progressBarFill {
+  background: linear-gradient(90deg, #6366f1, #818cf8);
+}
+
+.accent-emerald .progressBarFill {
+  background: linear-gradient(90deg, #10b981, #34d399);
+}
+
+.accent-purple .progressBarFill {
+  background: linear-gradient(90deg, #a855f7, #c084fc);
 }
 
 .tagStrip {
@@ -180,10 +302,10 @@
 }
 
 /* Smartphone Optimization */
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   .grid {
     grid-template-columns: 1fr;
-    gap: 1.15rem;
+    gap: 1.25rem;
   }
 }
 
@@ -194,10 +316,6 @@
 
   .container {
     padding: 0 1.15rem;
-  }
-
-  .grid {
-    margin-top: 2.25rem;
   }
 
   .capabilityCard {

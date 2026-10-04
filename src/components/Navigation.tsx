@@ -5,18 +5,18 @@ import styles from "./Navigation.module.css";
 import { motion, AnimatePresence } from "framer-motion";
 
 const INDIAN_LANGUAGES = [
-  { code: "hi", native: "हिन्दी", label: "Hindi" },
-  { code: "te", native: "తెలుగు", label: "Telugu" },
-  { code: "ta", native: "தமிழ்", label: "Tamil" },
-  { code: "bn", native: "বাংলা", label: "Bengali" },
-  { code: "mr", native: "मराठी", label: "Marathi" },
-  { code: "kn", native: "ಕನ್ನಡ", label: "Kannada" },
-  { code: "ml", native: "മലയാളം", label: "Malayalam" },
-  { code: "gu", native: "ગુજરાતી", label: "Gujarati" },
-  { code: "pa", native: "ਪੰਜਾਬੀ", label: "Punjabi" },
-  { code: "or", native: "ଓଡ଼ିଆ", label: "Odia" },
-  { code: "as", native: "অসমীয়া", label: "Assamese" },
-  { code: "ur", native: "اردو", label: "Urdu" },
+  { code: "hi", native: "हिन्दी", label: "Hindi", region: "North & Central India" },
+  { code: "te", native: "తెలుగు", label: "Telugu", region: "Andhra Pradesh & Telangana" },
+  { code: "ta", native: "தமிழ்", label: "Tamil", region: "Tamil Nadu" },
+  { code: "bn", native: "বাংলা", label: "Bengali", region: "West Bengal" },
+  { code: "mr", native: "मराठी", label: "Marathi", region: "Maharashtra" },
+  { code: "kn", native: "ಕನ್ನಡ", label: "Kannada", region: "Karnataka" },
+  { code: "ml", native: "മലയാളം", label: "Malayalam", region: "Kerala" },
+  { code: "gu", native: "ગુજરાતી", label: "Gujarati", region: "Gujarat" },
+  { code: "pa", native: "ਪੰਜਾਬੀ", label: "Punjabi", region: "Punjab" },
+  { code: "or", native: "ଓଡ଼ିଆ", label: "Odia", region: "Odisha" },
+  { code: "as", native: "অসমীয়া", label: "Assamese", region: "Assam" },
+  { code: "ur", native: "اردو", label: "Urdu", region: "National / South Asia" },
 ];
 
 declare global {
@@ -36,6 +36,7 @@ export default function Navigation() {
   const [activeSection, setActiveSection] = useState("");
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [activeLang, setActiveLang] = useState<string | null>(null);
+  const [langSearch, setLangSearch] = useState("");
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -114,13 +115,21 @@ export default function Navigation() {
     }
   };
 
+  const filteredLanguages = INDIAN_LANGUAGES.filter(
+    (lang) =>
+      lang.label.toLowerCase().includes(langSearch.toLowerCase()) ||
+      lang.native.toLowerCase().includes(langSearch.toLowerCase()) ||
+      lang.region.toLowerCase().includes(langSearch.toLowerCase())
+  );
+
   const navLinks = [
+    { name: "Overview", href: "#overview" },
     { name: "About", href: "#about" },
-    { name: "Education", href: "#education" },
-    { name: "Skills", href: "#skills" },
-    { name: "Experience", href: "#experience" },
-    { name: "Certifications", href: "#certifications" },
-    { name: "Projects", href: "#projects" },
+    { name: "Pedigree", href: "#education" },
+    { name: "Competencies", href: "#skills" },
+    { name: "Timeline", href: "#experience" },
+    { name: "Credentials", href: "#certifications" },
+    { name: "Ventures", href: "#projects" },
   ];
 
   return (
@@ -131,16 +140,21 @@ export default function Navigation() {
       <header className={`${styles.header} ${scrolled ? styles.headerScrolled : ""}`}>
         <div className={styles.container}>
           {/* Executive Brand Wordmark */}
-          <a href="#" className={styles.brand} aria-label="Jami Eswar Anil Kumar - Home">
+          <a href="#" className={styles.brand} aria-label="Jami Eswar Anil Kumar - Executive Home">
             <span className={styles.brandMonogram}>JEAK</span>
             <div className={styles.brandMeta}>
-              <span className={styles.brandName}>JAMI ESWAR ANIL KUMAR</span>
-              <span className={styles.brandRole}>Founder & Director • AI Architect</span>
+              <div className={styles.brandTitleRow}>
+                <span className={styles.brandName}>JAMI ESWAR ANIL KUMAR</span>
+                <span className={styles.verifiedDot} title="Verified Executive Profile">
+                  <i className="fa-solid fa-circle-check" />
+                </span>
+              </div>
+              <span className={styles.brandRole}>Founder & Director • Vyntyra Consultancy</span>
             </div>
           </a>
 
           {/* Desktop Executive Nav */}
-          <nav className={styles.desktopNav} aria-label="Main Navigation">
+          <nav className={styles.desktopNav} aria-label="Executive Navigation">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href.substring(1);
               return (
@@ -154,7 +168,7 @@ export default function Navigation() {
                     <motion.div
                       layoutId="activeNavIndicator"
                       className={styles.activeIndicator}
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 32 }}
                     />
                   )}
                 </a>
@@ -164,16 +178,16 @@ export default function Navigation() {
 
           {/* Right Action Suite (Locale Selector & Consultation CTA) */}
           <div className={styles.actions}>
-            {/* Integrated Indian Language Locale Selector */}
+            {/* Integrated Indian Language Locale Selector with Filter */}
             <div className={styles.localeWrapper} ref={dropdownRef}>
               <button
                 type="button"
                 className={`${styles.localeButton} ${activeLang ? styles.localeActive : ""}`}
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
                 aria-expanded={langDropdownOpen}
-                aria-label="Select Indian Language"
+                aria-label="Select Regional Indian Language"
               >
-                <i className="fa-solid fa-globe" />
+                <i className="fa-solid fa-language" />
                 <span className={styles.localeText}>
                   {activeLang ? INDIAN_LANGUAGES.find((l) => l.code === activeLang)?.native : "IN Languages"}
                 </span>
@@ -190,15 +204,28 @@ export default function Navigation() {
                     transition={{ duration: 0.18 }}
                   >
                     <div className={styles.dropdownHeader}>
-                      <span>Translate Portfolio (Indian Languages)</span>
+                      <span className={styles.dropdownTitle}>Translate Portfolio (Indian Languages)</span>
                       {activeLang && (
                         <button type="button" onClick={resetToEnglish} className={styles.resetLink}>
                           Reset (English)
                         </button>
                       )}
                     </div>
+
+                    {/* Filter Input */}
+                    <div className={styles.searchBox}>
+                      <i className="fa-solid fa-magnifying-glass" />
+                      <input
+                        type="text"
+                        value={langSearch}
+                        onChange={(e) => setLangSearch(e.target.value)}
+                        placeholder="Search Hindi, Telugu, Tamil..."
+                        className={styles.searchInput}
+                      />
+                    </div>
+
                     <div className={styles.languageGrid}>
-                      {INDIAN_LANGUAGES.map((lang) => (
+                      {filteredLanguages.map((lang) => (
                         <button
                           key={lang.code}
                           type="button"
@@ -215,7 +242,7 @@ export default function Navigation() {
               </AnimatePresence>
             </div>
 
-            {/* Corporate CTA */}
+            {/* Corporate Consultation CTA */}
             <a href="#contact" className={styles.consultBtn}>
               <span>Initiate Advisory</span>
               <i className="fa-solid fa-arrow-right" />
@@ -273,7 +300,7 @@ export default function Navigation() {
                   <span>Select Regional Language:</span>
                   {activeLang && (
                     <button type="button" onClick={resetToEnglish} className={styles.resetLink}>
-                      Reset to English
+                      Reset (English)
                     </button>
                   )}
                 </div>
@@ -291,7 +318,23 @@ export default function Navigation() {
                 </div>
               </div>
 
-              {/* Mobile Direct Action */}
+              {/* Direct Channels Bar */}
+              <div className={styles.mobileDirectChannels}>
+                <a href="mailto:jamianil37@gmail.com" className={styles.directChannelBtn}>
+                  <i className="fa-solid fa-envelope" />
+                  <span>Email</span>
+                </a>
+                <a href="https://wa.me/916301588867" target="_blank" rel="noopener noreferrer" className={styles.directChannelBtn}>
+                  <i className="fa-brands fa-whatsapp" />
+                  <span>WhatsApp</span>
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className={styles.directChannelBtn}>
+                  <i className="fa-brands fa-linkedin" />
+                  <span>LinkedIn</span>
+                </a>
+              </div>
+
+              {/* Mobile Primary Action */}
               <div className={styles.mobileDrawerFooter}>
                 <a
                   href="#contact"
@@ -299,7 +342,7 @@ export default function Navigation() {
                   onClick={() => setIsOpen(false)}
                 >
                   <i className="fa-regular fa-calendar-check" />
-                  <span>Schedule Consultation</span>
+                  <span>Schedule Consultation Briefing</span>
                 </a>
               </div>
             </div>

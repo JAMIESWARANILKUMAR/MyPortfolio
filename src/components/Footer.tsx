@@ -15,12 +15,18 @@ export default function Footer() {
               </div>
             </div>
             <p className={styles.brandThesis}>
-              Bridging enterprise AI systems with strategic human capital architecture to build 
-              resilient, future-ready organizations.
+              Bridging enterprise artificial intelligence systems with strategic human capital governance to 
+              architect resilient, scalable, and high-retention corporate organizations.
             </p>
-            <div className={styles.complianceTag}>
-              <i className="fa-solid fa-certificate" />
-              <span>ISO/IEC 40500 (WCAG 2.1 AA) Compliant Architecture</span>
+            <div className={styles.complianceRow}>
+              <div className={styles.complianceTag}>
+                <i className="fa-solid fa-certificate" />
+                <span>ISO/IEC 40500 (WCAG 2.1 AA) Compliant</span>
+              </div>
+              <div className={styles.statusTag}>
+                <span className="status-pulse" />
+                <span>Executive Operations Live</span>
+              </div>
             </div>
           </div>
 
@@ -29,32 +35,32 @@ export default function Footer() {
             <div className={styles.linkGroup}>
               <span className={styles.groupHeading}>Executive Dossier</span>
               <ul>
-                <li><a href="#about">Founder Profile</a></li>
-                <li><a href="#education">Academic Pedigree</a></li>
-                <li><a href="#skills">Strategic Competencies</a></li>
-                <li><a href="#experience">Milestone Timeline</a></li>
-                <li><a href="#certifications">Verified Credentials</a></li>
+                <li><a href="#about">Founder Profile & Vision</a></li>
+                <li><a href="#education">Academic Pedigree & Governance</a></li>
+                <li><a href="#skills">Strategic Competencies Matrix</a></li>
+                <li><a href="#experience">Leadership Milestone Track</a></li>
+                <li><a href="#certifications">Verified Credentials Hub</a></li>
               </ul>
             </div>
 
             <div className={styles.linkGroup}>
               <span className={styles.groupHeading}>Strategic Practices</span>
               <ul>
-                <li><a href="#projects">Vyntyra Consultancy</a></li>
+                <li><a href="#projects">Vyntyra Consultancy Services</a></li>
                 <li><a href="#projects">Enterprise AI Architecture</a></li>
-                <li><a href="#projects">Human Capital Strategy</a></li>
-                <li><a href="#projects">Vyntyra Academy</a></li>
-                <li><a href="#contact">Consultation Briefing</a></li>
+                <li><a href="#projects">Human Capital & Retention Design</a></li>
+                <li><a href="#projects">Vyntyra Academy National Cohorts</a></li>
+                <li><a href="#contact">Consultation Briefing Portal</a></li>
               </ul>
             </div>
 
             <div className={styles.linkGroup}>
-              <span className={styles.groupHeading}>Direct Channels</span>
+              <span className={styles.groupHeading}>Executive Channels</span>
               <ul>
                 <li><a href="mailto:jamianil37@gmail.com">jamianil37@gmail.com</a></li>
                 <li><a href="https://wa.me/916301588867" target="_blank" rel="noopener noreferrer">+91 63015 88867</a></li>
                 <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn Executive Profile</a></li>
-                <li><a href="https://github.com/JAMIESWARANILKUMAR" target="_blank" rel="noopener noreferrer">GitHub Engineering</a></li>
+                <li><a href="https://github.com/JAMIESWARANILKUMAR" target="_blank" rel="noopener noreferrer">GitHub Engineering Profile</a></li>
               </ul>
             </div>
           </div>
@@ -67,6 +73,8 @@ export default function Footer() {
           </p>
           <div className={styles.footnoteLinks}>
             <span>Confidential Executive Portal</span>
+            <span className={styles.divider}>•</span>
+            <span>Srikakulam, AP, India (IST • UTC+5:30)</span>
             <span className={styles.divider}>•</span>
             <a href="#overview">Back to Top ↑</a>
           </div>

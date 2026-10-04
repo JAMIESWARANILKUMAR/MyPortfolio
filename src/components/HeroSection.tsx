@@ -21,15 +21,40 @@ const INDIAN_GREETINGS = [
 ];
 
 const EXECUTIVE_METRICS = [
-  { label: "Executive Leadership", value: "Founder & Director", meta: "Vyntyra Consultancy Services" },
-  { label: "Talent & Strategy Reach", value: "500+", meta: "Mentees & Emerging Leaders" },
-  { label: "Institutional Accreditations", value: "B.Tech + BBA", meta: "AI/ML & Business Administration" },
-  { label: "Global Recognitions", value: "Google & TiE", meta: "Campus Ambassador & Cohort" },
+  {
+    label: "Corporate Practice",
+    value: "Founder & Director",
+    meta: "Vyntyra Consultancy Services",
+    indicator: "Active Leadership",
+    icon: "fa-solid fa-building-shield",
+  },
+  {
+    label: "Human Capital & Academy",
+    value: "500+ Mentees",
+    meta: "Emerging Tech & Business Leaders",
+    indicator: "National Reach",
+    icon: "fa-solid fa-users",
+  },
+  {
+    label: "Dual Academic Pedigree",
+    value: "B.Tech + BBA",
+    meta: "AI Architecture & Global Governance",
+    indicator: "AITAM & UoPeople USA",
+    icon: "fa-solid fa-graduation-cap",
+  },
+  {
+    label: "Ecosystem Accreditations",
+    value: "Google & TiE",
+    meta: "Campus Ambassador & Cohort",
+    indicator: "Verified Fellow",
+    icon: "fa-solid fa-award",
+  },
 ];
 
 export default function HeroSection() {
   const ref = useRef<HTMLElement>(null);
   const [greetingIdx, setGreetingIdx] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -37,7 +62,7 @@ export default function HeroSection() {
   });
 
   const opacityHero = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
-  const scaleHero = useTransform(scrollYProgress, [0, 1], [1, 0.94]);
+  const scaleHero = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
 
   // Subtle ambient mouse spotlight on desktop
   const mouseX = useMotionValue(0);
@@ -56,14 +81,16 @@ export default function HeroSection() {
     }
 
     const timer = setInterval(() => {
-      setGreetingIdx((prev) => (prev + 1) % INDIAN_GREETINGS.length);
-    }, 4000);
+      if (!isPaused) {
+        setGreetingIdx((prev) => (prev + 1) % INDIAN_GREETINGS.length);
+      }
+    }, 3800);
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       clearInterval(timer);
     };
-  }, [mouseX, mouseY]);
+  }, [mouseX, mouseY, isPaused]);
 
   return (
     <section className={styles.hero} id="overview" ref={ref}>
@@ -80,30 +107,48 @@ export default function HeroSection() {
         className={styles.content}
         style={{ opacity: opacityHero, scale: scaleHero }}
       >
-        {/* Executive Identity Ribbon */}
-        <div className={styles.topRibbon}>
-          <div className={styles.executiveBadge}>
+        {/* Live Executive Presence & Status Ticker */}
+        <div className={styles.topStatusStrip}>
+          <div className={styles.presenceChip}>
             <span className="status-pulse" />
-            <span className={styles.badgeText}>Founder & Director @ Vyntyra Consultancy</span>
+            <span className={styles.presenceText}>Open for Strategic Advisory & Consulting</span>
           </div>
+          <div className={styles.timezoneChip}>
+            <i className="fa-solid fa-location-dot" />
+            <span>Srikakulam, AP, India</span>
+            <span className={styles.chipDivider}>•</span>
+            <i className="fa-regular fa-clock" />
+            <span>IST (UTC+5:30)</span>
+          </div>
+        </div>
 
-          <div className={styles.greetingPill}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={greetingIdx}
-                className={styles.greetingInner}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.3 }}
-              >
-                <span className={styles.greetingScript}>{INDIAN_GREETINGS[greetingIdx].script}</span>
-                <span className={styles.greetingDivider}>•</span>
-                <span className={styles.greetingRoman}>{INDIAN_GREETINGS[greetingIdx].text}</span>
-                <span className={styles.greetingLang}>({INDIAN_GREETINGS[greetingIdx].lang})</span>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+        {/* Executive Greeting Ticker */}
+        <div
+          className={styles.greetingPill}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          title="Multilingual Indian Welcome (Click next)"
+          onClick={() => setGreetingIdx((prev) => (prev + 1) % INDIAN_GREETINGS.length)}
+          role="button"
+          tabIndex={0}
+        >
+          <span className={styles.greetingDot} />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={greetingIdx}
+              className={styles.greetingInner}
+              initial={{ opacity: 0, y: 7 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -7 }}
+              transition={{ duration: 0.28 }}
+            >
+              <span className={styles.greetingScript}>{INDIAN_GREETINGS[greetingIdx].script}</span>
+              <span className={styles.greetingDivider}>•</span>
+              <span className={styles.greetingRoman}>{INDIAN_GREETINGS[greetingIdx].text}</span>
+              <span className={styles.greetingLang}>({INDIAN_GREETINGS[greetingIdx].lang})</span>
+            </motion.div>
+          </AnimatePresence>
+          <i className="fa-solid fa-chevron-right" style={{ fontSize: "0.65rem", color: "var(--text-muted)" }} />
         </div>
 
         {/* Commanding Corporate Display Name */}
@@ -116,35 +161,56 @@ export default function HeroSection() {
 
         {/* Corporate Strategic Subtitle */}
         <p className={styles.strategicRole}>
-          Architecting Enterprise AI & Human Capital Strategy
+          Founder & Executive Director • AI Architecture & Human Capital Strategy
         </p>
 
         {/* Executive Value Proposition */}
         <p className={styles.thesisStatement}>
-          Bridging deep Artificial Intelligence architecture with human-centered organizational intelligence. 
-          Advising high-growth ventures, optimizing enterprise talent retention, and building institutional capacity.
+          Architecting future-ready enterprises by marrying deep Artificial Intelligence systems with 
+          human-centered organizational governance. Advising early-stage ventures, structuring high-retention 
+          workforce models, and leading national technical training initiatives.
         </p>
 
-        {/* Dual Primary & Secondary Action Suite */}
+        {/* Corporate Action Suite */}
         <div className={styles.actionRow}>
           <a href="#contact" className={styles.primaryAction}>
             <span>Initiate Strategic Advisory</span>
             <i className="fa-solid fa-arrow-right" />
           </a>
           <a href="#about" className={styles.secondaryAction}>
-            <span>Explore Executive Dossier</span>
             <i className="fa-regular fa-id-badge" />
+            <span>Executive Dossier</span>
+          </a>
+          <a
+            href="mailto:jamianil37@gmail.com?subject=Strategic%20Advisory%20Inquiry%20-%20Jami%20Eswar%20Anil%20Kumar"
+            className={styles.tertiaryAction}
+          >
+            <i className="fa-regular fa-envelope" />
+            <span>Direct Briefing</span>
           </a>
         </div>
 
         {/* Executive Impact Metrics Bento Strip */}
         <div className={styles.metricsGrid}>
           {EXECUTIVE_METRICS.map((metric, i) => (
-            <div key={i} className={styles.metricCard}>
-              <span className={styles.metricValue}>{metric.value}</span>
-              <span className={styles.metricLabel}>{metric.label}</span>
-              <span className={styles.metricMeta}>{metric.meta}</span>
-            </div>
+            <motion.div
+              key={i}
+              className={styles.metricCard}
+              whileHover={{ y: -3 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className={styles.metricHeader}>
+                <div className={styles.metricIconBox}>
+                  <i className={metric.icon} />
+                </div>
+                <span className={styles.metricIndicator}>{metric.indicator}</span>
+              </div>
+              <div className={styles.metricBody}>
+                <span className={styles.metricValue}>{metric.value}</span>
+                <span className={styles.metricLabel}>{metric.label}</span>
+                <span className={styles.metricMeta}>{metric.meta}</span>
+              </div>
+            </motion.div>
           ))}
         </div>
       </motion.div>

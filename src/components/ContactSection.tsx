@@ -7,28 +7,37 @@ import { motion } from "framer-motion";
 
 const ENGAGEMENT_OPTIONS = [
   "Strategic Enterprise Advisory",
-  "AI Architecture & Implementation",
-  "Human Capital / HRIS Design",
-  "Vyntyra Academy Workshop / Keynote",
-  "General Executive Inquiry",
+  "Enterprise AI Architecture & Pipelines",
+  "Human Capital & HRIS Retention Strategy",
+  "Vyntyra Academy Keynote / Campus Workshop",
+  "Confidential Executive Consultation",
+];
+
+const TIMELINE_OPTIONS = [
+  "Immediate (Within 1-2 Weeks)",
+  "Q4 2026 Strategic Cycle",
+  "Q1 2027 Strategic Cycle",
+  "Flexible / Long-Term Retainer",
 ];
 
 export default function ContactSection() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [organization, setOrganization] = useState("");
   const [engagementType, setEngagementType] = useState(ENGAGEMENT_OPTIONS[0]);
+  const [timeline, setTimeline] = useState(TIMELINE_OPTIONS[0]);
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !email) {
-      setStatus("Please provide your name and work email.");
+      setStatus("Please provide your full name and corporate email.");
       return;
     }
 
     const whatsappNumber = "916301588867";
-    const text = `*New Advisory Inquiry via Executive Portfolio*\n\n*Name:* ${name}\n*Email:* ${email}\n*Engagement Focus:* ${engagementType}\n*Details:* ${message || "Briefing requested."}`;
+    const text = `*New Advisory Inquiry - Executive Portfolio*\n\n*Name:* ${name}\n*Corporate Email:* ${email}\n*Organization:* ${organization || "Confidential"}\n*Engagement Focus:* ${engagementType}\n*Timeline:* ${timeline}\n*Scope Brief:* ${message || "Executive consultation requested."}`;
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
 
     setStatus("Redirecting to executive communication channel...");
@@ -36,16 +45,18 @@ export default function ContactSection() {
 
     setName("");
     setEmail("");
+    setOrganization("");
     setMessage("");
-    setTimeout(() => setStatus(""), 4000);
+    setTimeout(() => setStatus(""), 4500);
   };
 
   return (
     <section className={styles.contact} id="contact">
       <div className={styles.container}>
         <SectionHeading
-          title="Executive Advisory & Engagement"
-          subtitle="Initiate strategic collaboration across enterprise AI architecture, human capital scaling, or institutional training."
+          badge="Inquiry & Collaboration"
+          title="Executive Advisory & Engagement Portal"
+          subtitle="Initiate strategic collaboration across enterprise AI architecture, human capital scaling, institutional incubation, or national technical workshops."
         />
 
         <div className={styles.grid}>
@@ -127,7 +138,10 @@ export default function ContactSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.1 }}
           >
-            <h3 className={styles.formTitle}>Initiate Consultation Briefing</h3>
+            <div className={styles.formHeader}>
+              <h3 className={styles.formTitle}>Initiate Consultation Briefing</h3>
+              <span className={styles.formSubtitle}>Structured RFP & Advisory Intake Protocol</span>
+            </div>
 
             <div className={styles.fieldGrid}>
               <div className={styles.formField}>
@@ -143,7 +157,7 @@ export default function ContactSection() {
               </div>
 
               <div className={styles.formField}>
-                <label htmlFor="contact-email">Professional / Corporate Email *</label>
+                <label htmlFor="contact-email">Corporate / Work Email *</label>
                 <input
                   id="contact-email"
                   type="email"
@@ -156,19 +170,48 @@ export default function ContactSection() {
             </div>
 
             <div className={styles.formField}>
-              <label htmlFor="contact-type">Engagement Scope</label>
-              <select
-                id="contact-type"
-                value={engagementType}
-                onChange={(e) => setEngagementType(e.target.value)}
-                className={styles.selectInput}
-              >
-                {ENGAGEMENT_OPTIONS.map((opt, i) => (
-                  <option key={i} value={opt}>
-                    {opt}
-                  </option>
-                ))}
-              </select>
+              <label htmlFor="contact-org">Organization / Venture Name (Optional)</label>
+              <input
+                id="contact-org"
+                type="text"
+                value={organization}
+                onChange={(e) => setOrganization(e.target.value)}
+                placeholder="e.g. TechVentures Global / Academic Institution"
+              />
+            </div>
+
+            <div className={styles.fieldGrid}>
+              <div className={styles.formField}>
+                <label htmlFor="contact-type">Engagement Focus</label>
+                <select
+                  id="contact-type"
+                  value={engagementType}
+                  onChange={(e) => setEngagementType(e.target.value)}
+                  className={styles.selectInput}
+                >
+                  {ENGAGEMENT_OPTIONS.map((opt, i) => (
+                    <option key={i} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className={styles.formField}>
+                <label htmlFor="contact-timeline">Target Timeline</label>
+                <select
+                  id="contact-timeline"
+                  value={timeline}
+                  onChange={(e) => setTimeline(e.target.value)}
+                  className={styles.selectInput}
+                >
+                  {TIMELINE_OPTIONS.map((time, i) => (
+                    <option key={i} value={time}>
+                      {time}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
             <div className={styles.formField}>
@@ -178,7 +221,7 @@ export default function ContactSection() {
                 rows={4}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="Outline your enterprise objectives, timeline, or consultation focus..."
+                placeholder="Outline your enterprise objectives, challenges, or consultation focus..."
               />
             </div>
 
@@ -189,10 +232,10 @@ export default function ContactSection() {
 
             {status && <p className={styles.statusBanner}>{status}</p>}
 
-            <p className={styles.privacyNotice}>
+            <div className={styles.privacyNotice}>
               <i className="fa-solid fa-shield-halved" />
-              <span>Advisory inquiries are handled under strict non-disclosure and privacy protocols.</span>
-            </p>
+              <span>Advisory inquiries are handled under strict non-disclosure, confidentiality, and data privacy protocols.</span>
+            </div>
           </motion.form>
         </div>
       </div>

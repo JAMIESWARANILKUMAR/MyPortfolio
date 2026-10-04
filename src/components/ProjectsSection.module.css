@@ -22,21 +22,26 @@
   background: var(--gradient-card);
   border: 1px solid var(--border-subtle);
   border-radius: 24px;
-  padding: 2rem;
+  padding: 2.15rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 1.5rem;
   backdrop-filter: blur(20px);
-  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5);
-  transition: all 0.25s ease;
+  box-shadow: 
+    0 15px 35px -10px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
 }
 
 .cardFeatured {
-  border-color: rgba(56, 189, 248, 0.3);
+  border-color: rgba(56, 189, 248, 0.35);
   background: linear-gradient(135deg, rgba(14, 23, 42, 0.95) 0%, rgba(9, 14, 25, 0.85) 100%);
-  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.6), 0 0 30px rgba(56, 189, 248, 0.08);
+  box-shadow: 
+    0 20px 45px -10px rgba(0, 0, 0, 0.65), 
+    0 0 35px rgba(56, 189, 248, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .card:hover {
@@ -72,7 +77,7 @@
 
 .roleTag {
   font-family: var(--font-heading);
-  font-size: 0.92rem;
+  font-size: 0.94rem;
   font-weight: 700;
   color: #ffffff;
 }
@@ -88,12 +93,12 @@
 .cardBody {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.85rem;
 }
 
 .ventureTitle {
   font-family: var(--font-heading);
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   font-weight: 800;
   color: #ffffff;
   letter-spacing: -0.015em;
@@ -102,16 +107,38 @@
 
 .tagline {
   font-family: var(--font-heading);
-  font-size: 0.86rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: var(--accent-indigo);
   margin-bottom: 0.25rem;
 }
 
-.description {
-  font-size: 0.92rem;
+.narrativeSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 0.65rem 0;
+}
+
+.narrativeBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.narrativeLabel {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.narrativeText {
+  font-size: 0.88rem;
   color: var(--text-secondary);
-  line-height: 1.65;
+  line-height: 1.6;
 }
 
 .impactBox {
@@ -120,9 +147,9 @@
   gap: 0.75rem;
   padding: 0.85rem 1rem;
   border-radius: 12px;
-  background: rgba(16, 185, 129, 0.06);
-  border: 1px solid rgba(16, 185, 129, 0.2);
-  margin-top: 0.5rem;
+  background: rgba(16, 185, 129, 0.07);
+  border: 1px solid rgba(16, 185, 129, 0.22);
+  margin-top: 0.35rem;
 }
 
 .impactBox i {
@@ -151,31 +178,58 @@
 }
 
 .cardFooter {
-  padding-top: 1rem;
+  padding-top: 1.15rem;
   border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .tagCluster {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: 0.35rem;
 }
 
 .tag {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   color: var(--text-muted);
   background: rgba(255, 255, 255, 0.03);
-  padding: 0.25rem 0.6rem;
+  padding: 0.25rem 0.55rem;
   border-radius: 999px;
   border: 1px solid var(--border-subtle);
 }
 
+.actionLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.actionLink:hover {
+  color: #ffffff;
+  transform: translateX(2px);
+}
+
+.actionLink i {
+  font-size: 0.72rem;
+}
+
 /* Smartphone Optimization */
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   .grid {
     grid-template-columns: 1fr;
-    gap: 1.15rem;
+    gap: 1.25rem;
   }
 }
 
@@ -199,15 +253,26 @@
   }
 
   .ventureTitle {
-    font-size: 1.15rem;
+    font-size: 1.18rem;
   }
 
   .tagline {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
   }
 
-  .description {
-    font-size: 0.88rem;
+  .narrativeText {
+    font-size: 0.85rem;
     line-height: 1.55;
+  }
+
+  .cardFooter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .actionLink {
+    width: 100%;
+    justify-content: flex-start;
   }
 }

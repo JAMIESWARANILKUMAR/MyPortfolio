@@ -14,7 +14,7 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr 1.15fr;
-  gap: 3rem;
+  gap: 3.5rem;
   margin-top: 3.5rem;
   align-items: start;
 }
@@ -29,7 +29,9 @@
   flex-direction: column;
   gap: 1.5rem;
   backdrop-filter: blur(20px);
-  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.5);
+  box-shadow: 
+    0 20px 45px -10px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .statusBadge {
@@ -45,6 +47,7 @@
   background: rgba(16, 185, 129, 0.08);
   border: 1px solid rgba(16, 185, 129, 0.2);
   width: fit-content;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .infoTitle {
@@ -163,7 +166,16 @@
   flex-direction: column;
   gap: 1.25rem;
   backdrop-filter: blur(20px);
-  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.5);
+  box-shadow: 
+    0 20px 45px -10px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.formHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 0.25rem;
 }
 
 .formTitle {
@@ -172,13 +184,20 @@
   font-weight: 700;
   color: #ffffff;
   letter-spacing: -0.015em;
-  margin-bottom: 0.5rem;
+}
+
+.formSubtitle {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .fieldGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
+  gap: 1.15rem;
 }
 
 .formField {
@@ -197,13 +216,13 @@
 .formField input,
 .formField textarea,
 .selectInput {
-  background: rgba(5, 7, 13, 0.7);
+  background: rgba(4, 6, 10, 0.75);
   border: 1px solid var(--border-subtle);
   border-radius: 12px;
   padding: 0.85rem 1rem;
   color: var(--text-primary);
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: 16px !important;
   transition: all 0.2s ease;
   min-height: 46px;
 }
@@ -218,7 +237,7 @@
 .selectInput:focus {
   outline: none;
   border-color: var(--accent-cyan);
-  background: rgba(9, 14, 25, 0.9);
+  background: rgba(8, 12, 22, 0.95);
   box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
 }
 
@@ -227,7 +246,7 @@
 }
 
 .selectInput option {
-  background: #090e19;
+  background: #080c16;
   color: #ffffff;
 }
 
@@ -240,20 +259,20 @@
   padding: 0.95rem;
   border-radius: 14px;
   background: var(--gradient-executive);
-  color: #05070d;
+  color: #04060a;
   font-family: var(--font-heading);
   font-size: 0.96rem;
   font-weight: 700;
   cursor: pointer;
   min-height: 50px;
-  box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.4);
+  box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.3);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  margin-top: 0.5rem;
+  margin-top: 0.35rem;
 }
 
 .submitAction:hover {
   transform: translateY(-2px);
-  box-shadow: 0 15px 30px -5px rgba(56, 189, 248, 0.6);
+  box-shadow: 0 15px 30px -5px rgba(56, 189, 248, 0.65);
 }
 
 .statusBanner {
@@ -275,11 +294,13 @@
   color: var(--text-muted);
   text-align: center;
   margin-top: 0.25rem;
+  line-height: 1.45;
 }
 
 .privacyNotice i {
   color: var(--accent-cyan);
   font-size: 0.8rem;
+  flex-shrink: 0;
 }
 
 /* Smartphone Optimization */

@@ -201,7 +201,7 @@ export default function Navigation() {
               aria-label="Open Executive AI Assistant"
             >
               <div className={styles.aiIconPulse}>
-                <i className="fa-solid fa-sparkles" />
+                <i className="fa-solid fa-wand-magic-sparkles" />
               </div>
               <span className={styles.aiBtnText}>Executive AI</span>
               <span className={styles.aiLiveBadge}>24/7</span>

@@ -57,7 +57,7 @@ export default function Footer() {
 
           <div className={styles.spotlightAction}>
             <span className={styles.spotlightActionBtn}>
-              <i className="fa-solid fa-sparkles" />
+              <i className="fa-solid fa-wand-magic-sparkles" />
               <span>Launch Executive AI</span>
               <i className="fa-solid fa-arrow-right" />
             </span>

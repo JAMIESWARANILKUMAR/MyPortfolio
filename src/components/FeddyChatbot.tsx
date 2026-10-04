@@ -146,7 +146,7 @@ export default function FeddyChatbot() {
             transition={{ delay: 1 }}
             onClick={() => setIsOpen(true)}
           >
-            <i className="fa-solid fa-sparkles" />
+            <i className="fa-solid fa-wand-magic-sparkles" />
             <span>Ask Jami AI</span>
             <span className={styles.tooltipAIBadge}>24/7</span>
           </motion.div>

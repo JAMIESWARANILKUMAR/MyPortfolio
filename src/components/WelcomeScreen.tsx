@@ -174,7 +174,7 @@ export default function WelcomeScreen() {
                 transition={{ repeat: Infinity, duration: 2.8, ease: "easeInOut" }}
               >
                 <span>JEAK</span>
-                <i className="fa-solid fa-sparkles" />
+                <i className="fa-solid fa-wand-magic-sparkles" />
               </motion.div>
             </div>
 

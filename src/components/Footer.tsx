@@ -1,9 +1,151 @@
+"use client";
+
 import styles from "./Footer.module.css";
 
 export default function Footer() {
+  const openFeddyChatbot = () => {
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event("open-feddy-chatbot"));
+    }
+  };
+
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
+        {/* Interactive Feddy Assistant Spotlight Showcase Card */}
+        <div
+          className={styles.feddySpotlight}
+          onClick={openFeddyChatbot}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              openFeddyChatbot();
+            }
+          }}
+          aria-label="Open Feddy Digital Assistant Chatbot"
+        >
+          <div className={styles.feddySpotlightVisual}>
+            <img
+              src="/images/feddy-three.png?version=1790749947"
+              alt="Feddy logo"
+              className="main__topSection__logo"
+            />
+            <div className={styles.feddySpotlightPulse} />
+          </div>
+          <div className={styles.feddySpotlightContent}>
+            <div className={styles.feddySpotlightHeader}>
+              <span className={styles.feddyTag}>FEDERAL BANK • DIGITAL ASSISTANT</span>
+              <span className={styles.feddyStatusBadge}>
+                <span className="status-pulse" />
+                <span>24/7 AI Conversational Banking</span>
+              </span>
+            </div>
+            <h3 className={styles.feddySpotlightTitle}>Meet Feddy — Your True Banking & Advisory Assistant</h3>
+            <p className={styles.feddySpotlightDesc}>
+              Quickly send money, pay bills, inspect accounts, or query Jami Eswar Anil Kumar's executive AI & enterprise advisory desk. Tap to open the interactive assistant modal!
+            </p>
+          </div>
+          <div className={styles.feddySpotlightAction}>
+            <span className={styles.feddyActionBtn}>
+              <span>Launch Feddy</span>
+              <i className="fa-solid fa-arrow-right" />
+            </span>
+          </div>
+        </div>
+
+        {/* High-Quality Executive Luxury Icon Strip */}
+        <div className={styles.luxuryNetworksSection}>
+          <div className={styles.networksHeader}>
+            <span className={styles.networksTitle}>Verified Executive Channels & Networks</span>
+            <span className={styles.networksSub}>Enterprise communication grade • ISO/IEC 40500 compliant</span>
+          </div>
+          <div className={styles.luxuryNetworks}>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.luxuryPill}
+              aria-label="LinkedIn Executive Profile"
+            >
+              <div className={`${styles.iconCircle} ${styles.iconLinkedin}`}>
+                <i className="fa-brands fa-linkedin-in" />
+              </div>
+              <div className={styles.pillMeta}>
+                <span className={styles.pillLabel}>LinkedIn</span>
+                <span className={styles.pillDetail}>Executive Network</span>
+              </div>
+              <i className={`fa-solid fa-arrow-up-right-from-square ${styles.externalIcon}`} />
+            </a>
+
+            <a
+              href="https://github.com/JAMIESWARANILKUMAR"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.luxuryPill}
+              aria-label="GitHub Engineering Profile"
+            >
+              <div className={`${styles.iconCircle} ${styles.iconGithub}`}>
+                <i className="fa-brands fa-github" />
+              </div>
+              <div className={styles.pillMeta}>
+                <span className={styles.pillLabel}>GitHub</span>
+                <span className={styles.pillDetail}>System Architecture</span>
+              </div>
+              <i className={`fa-solid fa-arrow-up-right-from-square ${styles.externalIcon}`} />
+            </a>
+
+            <a
+              href="https://wa.me/916301588867"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.luxuryPill}
+              aria-label="WhatsApp Executive Channel"
+            >
+              <div className={`${styles.iconCircle} ${styles.iconWhatsapp}`}>
+                <i className="fa-brands fa-whatsapp" />
+              </div>
+              <div className={styles.pillMeta}>
+                <span className={styles.pillLabel}>WhatsApp</span>
+                <span className={styles.pillDetail}>+91 63015 88867</span>
+              </div>
+              <i className={`fa-solid fa-arrow-up-right-from-square ${styles.externalIcon}`} />
+            </a>
+
+            <a
+              href="mailto:jamianil37@gmail.com"
+              className={styles.luxuryPill}
+              aria-label="Email Executive Office"
+            >
+              <div className={`${styles.iconCircle} ${styles.iconEmail}`}>
+                <i className="fa-solid fa-envelope" />
+              </div>
+              <div className={styles.pillMeta}>
+                <span className={styles.pillLabel}>Email</span>
+                <span className={styles.pillDetail}>jamianil37@gmail.com</span>
+              </div>
+              <i className={`fa-solid fa-arrow-up-right-from-square ${styles.externalIcon}`} />
+            </a>
+
+            <a
+              href="tel:+916301588867"
+              className={styles.luxuryPill}
+              aria-label="Direct Phone Consultation"
+            >
+              <div className={`${styles.iconCircle} ${styles.iconPhone}`}>
+                <i className="fa-solid fa-phone" />
+              </div>
+              <div className={styles.pillMeta}>
+                <span className={styles.pillLabel}>Advisory Line</span>
+                <span className={styles.pillDetail}>Direct Consultation</span>
+              </div>
+              <i className={`fa-solid fa-arrow-up-right-from-square ${styles.externalIcon}`} />
+            </a>
+          </div>
+        </div>
+
+        {/* Main Footer Directory Grid */}
         <div className={styles.topRow}>
           {/* Brand Column */}
           <div className={styles.brandCol}>

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import CustomCursor from "@/components/CustomCursor";
+import FeddyChatbot from "@/components/FeddyChatbot";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -78,6 +79,7 @@ export default function RootLayout({
         <CustomCursor />
         <Navigation />
         {children}
+        <FeddyChatbot />
       </body>
     </html>
   );

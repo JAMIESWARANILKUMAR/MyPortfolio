@@ -115,6 +115,13 @@ export default function Navigation() {
     }
   };
 
+  const openFeddyChatbot = () => {
+    setIsOpen(false);
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event("open-feddy-chatbot"));
+    }
+  };
+
   const filteredLanguages = INDIAN_LANGUAGES.filter(
     (lang) =>
       lang.label.toLowerCase().includes(langSearch.toLowerCase()) ||
@@ -176,8 +183,27 @@ export default function Navigation() {
             })}
           </nav>
 
-          {/* Right Action Suite (Locale Selector & Consultation CTA) */}
+          {/* Right Action Suite (Feddy Chatbot, Locale Selector & Consultation CTA) */}
           <div className={styles.actions}>
+            {/* Feddy AI Chatbot Button */}
+            <button
+              type="button"
+              onClick={openFeddyChatbot}
+              className={styles.feddyHeaderBtn}
+              title="Chat with Feddy AI Digital Assistant"
+              aria-label="Open Feddy Digital Assistant"
+            >
+              <div className={styles.feddyAvatarCircle}>
+                <img
+                  src="/images/feddy-three.png?version=1790749947"
+                  alt="Feddy logo"
+                  className={styles.feddyHeaderAvatar}
+                />
+              </div>
+              <span className={styles.feddyHeaderText}>Ask Feddy</span>
+              <span className={styles.feddyHeaderBadge}>AI</span>
+            </button>
+
             {/* Integrated Indian Language Locale Selector with Filter */}
             <div className={styles.localeWrapper} ref={dropdownRef}>
               <button
@@ -280,6 +306,30 @@ export default function Navigation() {
                 <span>Available for Advisory & High-Impact Consulting</span>
               </div>
 
+              {/* Mobile Feddy AI Assistant Feature Card */}
+              <div
+                className={styles.mobileFeddyCard}
+                onClick={openFeddyChatbot}
+                role="button"
+                tabIndex={0}
+              >
+                <div className={styles.mobileFeddyAvatar}>
+                  <img
+                    src="/images/feddy-three.png?version=1790749947"
+                    alt="Feddy logo"
+                    className="main__topSection__logo"
+                  />
+                </div>
+                <div className={styles.mobileFeddyInfo}>
+                  <div className={styles.mobileFeddyTitleRow}>
+                    <strong>Ask Feddy AI Assistant</strong>
+                    <span className={styles.mobileFeddyBadge}>Digital Assistant</span>
+                  </div>
+                  <span>Instant banking & advisory questions. Tap to launch!</span>
+                </div>
+                <i className="fa-solid fa-chevron-right" />
+              </div>
+
               <nav className={styles.mobileNavLinks} aria-label="Mobile Navigation Links">
                 {navLinks.map((link) => (
                   <a
@@ -300,7 +350,7 @@ export default function Navigation() {
                   <span>Select Regional Language:</span>
                   {activeLang && (
                     <button type="button" onClick={resetToEnglish} className={styles.resetLink}>
-                      Reset (English)
+                      Reset to English
                     </button>
                   )}
                 </div>

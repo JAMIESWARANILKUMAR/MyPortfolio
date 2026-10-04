@@ -1,117 +1,143 @@
-/* Floating Trigger Avatar (Bottom Screen) */
+/* Floating Executive AI Trigger Widget (Bottom Screen) */
 .floatingTriggerWrapper {
   position: fixed;
   bottom: 24px;
   right: 28px;
   z-index: 9990;
   display: flex;
-  align-items: flex-end;
-  gap: 0.75rem;
+  align-items: center;
+  gap: 0.85rem;
 }
 
 .floatingAvatarBtn {
   position: relative;
-  width: 66px;
-  height: 82px;
-  background: transparent;
-  border: none;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: #090d16;
+  border: 2px solid rgba(56, 189, 248, 0.45);
   cursor: pointer;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.45));
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  padding: 0;
+  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.6));
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 2px;
+}
+
+.floatingAvatarBtn:hover {
+  border-color: rgba(56, 189, 248, 0.9);
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
+  transform: translateY(-2px);
 }
 
 .avatarImgBox {
   width: 100%;
   height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #0d1424;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
 }
 
-.main__topSection__logo {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  transition: transform 0.25s ease;
+.executiveTriggerAvatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
-.floatingAvatarBtn:hover .main__topSection__logo {
-  transform: scale(1.08) translateY(-4px);
+.floatingAvatarBtn:hover .executiveTriggerAvatar {
+  transform: scale(1.08);
 }
 
 .pulseRing {
   position: absolute;
-  bottom: 6px;
-  width: 44px;
-  height: 44px;
+  inset: -6px;
   border-radius: 50%;
-  background: rgba(245, 158, 11, 0.2);
-  z-index: -1;
-  animation: pulse-ring 2.4s infinite;
+  border: 1.5px solid rgba(56, 189, 248, 0.5);
+  animation: pulse-ring 2.6s infinite cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
 }
 
 @keyframes pulse-ring {
   0% {
-    transform: scale(0.9);
+    transform: scale(0.95);
     opacity: 0.8;
   }
-  70% {
-    transform: scale(1.6);
+  60% {
+    transform: scale(1.4);
     opacity: 0;
   }
   100% {
-    transform: scale(0.9);
+    transform: scale(0.95);
     opacity: 0;
   }
 }
 
 .onlineBadge {
   position: absolute;
-  top: 14px;
-  right: 6px;
-  width: 12px;
-  height: 12px;
+  bottom: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: #10b981;
-  border: 2px solid #ffffff;
+  border: 2px solid #090d16;
   box-shadow: 0 0 10px #10b981;
 }
 
 .floatingTooltip {
-  background: rgba(13, 20, 36, 0.95);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  padding: 0.4rem 0.85rem;
+  background: rgba(13, 20, 36, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  padding: 0.45rem 0.95rem;
   border-radius: 999px;
   color: #ffffff;
   font-family: var(--font-heading);
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 0.45rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  gap: 0.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   cursor: pointer;
   white-space: nowrap;
-  margin-bottom: 20px;
+  transition: all 0.2s ease;
+}
+
+.floatingTooltip:hover {
+  background: rgba(20, 30, 55, 0.96);
+  border-color: rgba(56, 189, 248, 0.6);
+  transform: translateX(-2px);
 }
 
 .floatingTooltip i {
-  color: #f59e0b;
-  font-size: 0.75rem;
+  color: #38bdf8;
+  font-size: 0.82rem;
+}
+
+.tooltipAIBadge {
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 0.1rem 0.4rem;
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34d399;
+  border-radius: 6px;
 }
 
 /* Modal Popup Backdrop & Container */
 .modalBackdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(3, 6, 12, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   z-index: 99999;
   display: flex;
   align-items: center;
@@ -120,14 +146,15 @@
 }
 
 .popupContainer {
-  width: 410px;
+  width: 430px;
   max-width: 94vw;
-  height: 640px;
+  height: 650px;
   max-height: 92vh;
-  background: #ffffff;
-  color: #1a1a1a;
+  background: #0a0e1a;
+  color: #f1f5f9;
+  border: 1px solid rgba(56, 189, 248, 0.25);
   border-radius: 28px;
-  box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.85), 0 0 40px -10px rgba(56, 189, 248, 0.2);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -141,9 +168,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 18px;
-  background: #ffffff;
-  border-bottom: 1px solid #f0f2f5;
-  height: 54px;
+  background: rgba(13, 20, 36, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  height: 60px;
+  flex-shrink: 0;
 }
 
 .barIconBtn {
@@ -152,43 +180,76 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
-  background: transparent;
-  border: none;
-  color: #2c3e50;
-  font-size: 1.15rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  font-size: 1rem;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .barIconBtn:hover {
-  background: #f1f4f8;
+  background: rgba(56, 189, 248, 0.15);
+  border-color: rgba(56, 189, 248, 0.4);
+  color: var(--accent-cyan);
 }
 
-.federalBankLogoBox {
+.brandTitleBox {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.miniMonogram {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--gradient-executive);
+  color: #04060a;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.bankLogoImg {
-  height: 22px;
-  object-fit: contain;
-}
-
-.bankLogoFallback {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: 1.15rem;
-  color: #004b8d;
-  font-style: italic;
-  letter-spacing: -0.02em;
+  font-size: 0.78rem;
+  flex-shrink: 0;
+}
+
+.brandMetaGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.brandNameLine {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.brandName {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.brandNameLine i {
+  color: #38bdf8;
+  font-size: 0.75rem;
+}
+
+.brandRoleText {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
 }
 
 .topRightActions {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.4rem;
 }
 
 .barCloseBtn {
@@ -197,119 +258,162 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
-  background: transparent;
-  border: none;
-  color: #2c3e50;
-  font-size: 1.25rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  font-size: 1.15rem;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .barCloseBtn:hover {
-  background: #fee2e2;
-  color: #ef4444;
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.5);
+  color: #f87171;
 }
 
-/* Welcome Scroll Body (Exact UI from Screenshot) */
+/* Welcome Scroll Body */
 .welcomeScrollBody {
   flex: 1;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  padding: 16px 20px 20px;
+  padding: 18px 20px 22px;
   gap: 18px;
-  background: #ffffff;
+  background: radial-gradient(circle at top right, rgba(14, 165, 233, 0.08) 0%, transparent 60%);
 }
 
 /* Greeting Hero Card */
 .greetingCard {
-  background: linear-gradient(135deg, #f4f7fb 0%, #e9eff7 100%);
+  background: linear-gradient(135deg, rgba(13, 20, 36, 0.9) 0%, rgba(20, 32, 58, 0.7) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.25);
   border-radius: 20px;
-  padding: 18px;
+  padding: 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  gap: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 .greetingLeft {
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
+  gap: 0.35rem;
   flex: 1;
+}
+
+.executivePillBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: fit-content;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #34d399;
+  font-weight: 600;
 }
 
 .greetingTitle {
   font-family: var(--font-heading);
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 800;
-  color: #1a202c;
+  color: #ffffff;
   margin: 0;
   line-height: 1.2;
 }
 
 .greetingSubtitle {
-  font-size: 0.86rem;
-  color: #4a5568;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
   line-height: 1.5;
   margin: 0;
 }
 
 .greetingAvatarWrap {
-  width: 95px;
-  height: 110px;
+  width: 82px;
+  height: 82px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 2px solid rgba(56, 189, 248, 0.45);
   flex-shrink: 0;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  background: #04060a;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 .torsoAvatarImg {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* Main FEDDY Feature Section */
+/* Main Feature Section */
 .mainFeatureSection {
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
+  gap: 0.55rem;
+}
+
+.featureHeaderRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
 }
 
 .feddyBrandHeading {
   font-family: var(--font-heading);
-  font-size: 1.85rem;
+  font-size: 1.75rem;
   font-weight: 900;
-  color: #111827;
+  color: #ffffff;
   letter-spacing: -0.02em;
   margin: 0;
   line-height: 1.1;
+  background: linear-gradient(135deg, #ffffff 30%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .feddyTagline {
   font-family: var(--font-heading);
-  font-size: 1.18rem;
-  font-weight: 800;
-  color: #005aa9;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
   margin: 0;
   line-height: 1.25;
 }
 
+.corporatePillTag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 8px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: #38bdf8;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 .conversationalSubheading {
   font-family: var(--font-heading);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 700;
-  color: #1f2937;
-  margin-top: 0.35rem;
+  color: #ffffff;
+  margin-top: 0.25rem;
 }
 
 .feddyDescription {
-  font-size: 0.86rem;
-  color: #555e6d;
-  line-height: 1.6;
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
   margin: 0;
 }
 
@@ -317,79 +421,92 @@
 .quickPrompts {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
-  margin-top: 0.65rem;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
 }
 
 .promptPill {
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 999px;
-  padding: 0.4rem 0.85rem;
+  padding: 0.45rem 0.85rem;
   font-size: 0.78rem;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.2s ease;
   font-family: var(--font-heading);
+  text-align: left;
 }
 
 .promptPill:hover {
-  background: #e0f2fe;
-  border-color: #38bdf8;
-  color: #0284c7;
+  background: rgba(56, 189, 248, 0.15);
+  border-color: rgba(56, 189, 248, 0.45);
+  color: #ffffff;
+  transform: translateY(-1px);
 }
 
 .startChatBtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.55rem;
-  background: linear-gradient(135deg, #005aa9 0%, #003a6d 100%);
-  color: #ffffff;
-  padding: 0.8rem;
+  gap: 0.6rem;
+  background: var(--gradient-executive);
+  color: #04060a;
+  padding: 0.85rem;
   border-radius: 14px;
   font-family: var(--font-heading);
   font-size: 0.92rem;
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
+  border: none;
   margin-top: 0.85rem;
-  box-shadow: 0 8px 20px -5px rgba(0, 90, 169, 0.45);
-  transition: transform 0.2s ease;
+  box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .startChatBtn:hover {
   transform: translateY(-2px);
+  box-shadow: 0 14px 30px -5px rgba(56, 189, 248, 0.6);
 }
 
-/* Maintenance Notice Box */
+/* Corporate Governance Notice Box */
 .maintenanceNoticeBox {
   margin-top: auto;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  padding: 14px 16px;
-  text-align: center;
+  background: rgba(13, 20, 36, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 12px 14px;
 }
 
 .maintenanceNoticeBox p {
-  font-size: 0.85rem;
-  color: #111827;
-  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.45;
   margin: 0;
 }
 
-.maintenanceNoticeBox strong {
-  font-weight: 700;
+.maintenanceNoticeBox i {
+  color: #38bdf8;
+  font-size: 0.9rem;
+  margin-top: 2px;
+  flex-shrink: 0;
 }
 
-/* Chat Interface View */
+.maintenanceNoticeBox strong {
+  color: #ffffff;
+}
+
+/* Chat Dialogue Interface View */
 .chatInterface {
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: #f8fafc;
+  background: #060911;
 }
 
 .chatMessageList {
@@ -417,11 +534,12 @@
 }
 
 .feddyMiniAvatar {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   overflow: hidden;
-  background: #e2e8f0;
+  background: #0d1424;
+  border: 1px solid rgba(56, 189, 248, 0.4);
   flex-shrink: 0;
 }
 
@@ -432,48 +550,51 @@
 }
 
 .bubble {
-  max-width: 78%;
-  padding: 10px 14px;
-  border-radius: 16px;
+  max-width: 80%;
+  padding: 11px 15px;
+  border-radius: 18px;
   font-size: 0.86rem;
-  line-height: 1.45;
+  line-height: 1.5;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
 }
 
 .bubbleUser {
-  background: #005aa9;
+  background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
   color: #ffffff;
   border-bottom-right-radius: 4px;
+  box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
 }
 
 .bubbleFeddy {
-  background: #ffffff;
-  color: #1f2937;
+  background: rgba(13, 20, 36, 0.85);
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom-left-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .messageTime {
   font-size: 0.68rem;
-  opacity: 0.75;
+  opacity: 0.7;
   align-self: flex-end;
+  font-family: var(--font-mono);
 }
 
 .typingBubble {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 5px;
-  padding: 12px 16px;
+  gap: 6px;
+  padding: 12px 18px;
 }
 
 .typingDot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #005aa9;
+  background: #38bdf8;
   animation: typing-bounce 1.2s infinite;
 }
 
@@ -500,39 +621,47 @@
   align-items: center;
   gap: 8px;
   padding: 12px 16px;
-  background: #ffffff;
-  border-top: 1px solid #e2e8f0;
+  background: rgba(13, 20, 36, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .chatInput {
   flex: 1;
-  padding: 10px 14px;
+  padding: 10px 16px;
   border-radius: 999px;
-  border: 1px solid #cbd5e1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   font-size: 16px !important;
-  color: #1e293b;
+  color: #ffffff;
   outline: none;
+  transition: border-color 0.2s ease;
 }
 
 .chatInput:focus {
-  border-color: #005aa9;
+  border-color: #38bdf8;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .chatSendBtn {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background: #005aa9;
-  color: #ffffff;
+  background: var(--gradient-executive);
+  color: #04060a;
   border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.95rem;
   cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-/* Smartphone Responsiveness */
+.chatSendBtn:hover {
+  transform: scale(1.06);
+}
+
+/* Responsive Handling */
 @media (max-width: 640px) {
   .modalBackdrop {
     padding: 0;
@@ -542,7 +671,7 @@
   .popupContainer {
     width: 100%;
     max-width: 100%;
-    height: 85vh;
+    height: 86vh;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
@@ -553,7 +682,7 @@
   }
 
   .floatingAvatarBtn {
-    width: 58px;
-    height: 72px;
+    width: 54px;
+    height: 54px;
   }
 }

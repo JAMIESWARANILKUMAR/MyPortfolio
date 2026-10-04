@@ -5,7 +5,7 @@ import styles from "./FeddyChatbot.module.css";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Message {
-  sender: "feddy" | "user";
+  sender: "assistant" | "user";
   text: string;
   time: string;
 }
@@ -17,8 +17,8 @@ export default function FeddyChatbot() {
   const [inputMessage, setInputMessage] = useState("");
   const [messages, setMessages] = useState<Message[]>([
     {
-      sender: "feddy",
-      text: "Hello! I'm Feddy, your personal digital assistant. How can I help you today with banking or Jami's executive advisory services?",
+      sender: "assistant",
+      text: "Hello! I am Jami Eswar Anil Kumar's Executive AI Assistant. How can I assist you with Jami's strategic consulting, enterprise AI architecture, academic credentials, or leadership at Vyntyra Consultancy Services?",
       time: "Just now",
     },
   ]);
@@ -26,7 +26,7 @@ export default function FeddyChatbot() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Dynamic greeting based on current hour
+    // Dynamic greeting based on current time
     const hour = new Date().getHours();
     if (hour < 12) {
       setGreeting("Good Morning! ☀️");
@@ -36,10 +36,14 @@ export default function FeddyChatbot() {
       setGreeting("Good Evening! 🌙");
     }
 
-    // Global listener for opening Feddy chatbot from header or footer
+    // Global listener for opening executive AI chatbot from header or footer
     const handleOpenChat = () => setIsOpen(true);
     window.addEventListener("open-feddy-chatbot", handleOpenChat);
-    return () => window.removeEventListener("open-feddy-chatbot", handleOpenChat);
+    window.addEventListener("open-executive-ai", handleOpenChat);
+    return () => {
+      window.removeEventListener("open-feddy-chatbot", handleOpenChat);
+      window.removeEventListener("open-executive-ai", handleOpenChat);
+    };
   }, []);
 
   useEffect(() => {
@@ -64,36 +68,46 @@ export default function FeddyChatbot() {
     setIsTyping(true);
 
     setTimeout(() => {
-      let botReply = "Thank you for reaching out! I can assist with banking queries, accounts, or direct you to Jami Eswar Anil Kumar's strategic advisory desk at Vyntyra Consultancy.";
+      let botReply = "Thank you for inquiring about Jami Eswar Anil Kumar's executive practice. Jami specializes in enterprise AI architectures and strategic human capital governance through Vyntyra Consultancy Services.";
       const lower = text.toLowerCase();
 
-      if (lower.includes("money") || lower.includes("transfer") || lower.includes("pay")) {
-        botReply = "With Feddy, you can initiate simulated transfers, pay utility bills, or check balances seamlessly. How much would you like to process?";
-      } else if (lower.includes("jami") || lower.includes("vyntyra") || lower.includes("advisory") || lower.includes("consult")) {
-        botReply = "Jami Eswar Anil Kumar is the Founder & Executive Director of Vyntyra Consultancy Services. He advises on Enterprise AI architectures and Human Capital systems. Would you like to schedule an advisory briefing?";
-      } else if (lower.includes("account") || lower.includes("banking") || lower.includes("loan")) {
-        botReply = "Federal Bank offers digital savings accounts, commercial lending, deposit schemes, and FedMobile 24/7 internet banking.";
+      if (lower.includes("who is") || lower.includes("about jami") || lower.includes("background") || lower.includes("founder")) {
+        botReply = "Jami Eswar Anil Kumar is the Founder & Executive Director of Vyntyra Consultancy Services. Operating at the intersection of deep computational AI engineering and corporate business strategy, he advises enterprises and institutions on scaling high-retention organizations and AI decision pipelines.";
+      } else if (lower.includes("vyntyra") || lower.includes("consultancy") || lower.includes("academy") || lower.includes("firm")) {
+        botReply = "Vyntyra Consultancy Services is an executive advisory practice founded by Jami Eswar Anil Kumar. It provides enterprise AI strategy, predictive workforce analytics, and talent architecture. Through Vyntyra Academy, Jami has trained over 500 emerging technical minds and leaders nationwide.";
+      } else if (lower.includes("education") || lower.includes("pedigree") || lower.includes("degree") || lower.includes("aitam") || lower.includes("university")) {
+        botReply = "Jami pursues a dual-disciplinary academic path: B.Tech in Computer Science & Engineering (AI & ML) from Aditya Institute of Technology and Management (CGPA: 7.9) alongside a Bachelor of Business Administration (BBA) from University of the People (Pasadena, California, USA), bridging deep tech with global corporate governance.";
+      } else if (lower.includes("ai") || lower.includes("machine learning") || lower.includes("tech") || lower.includes("skills") || lower.includes("python")) {
+        botReply = "In AI engineering, Jami specializes in custom LLM workflows, automated decision pipelines, predictive modeling, prompt engineering, and deep learning architectures with Python, TensorFlow, PyTorch, Scikit-Learn, and Google Gemini.";
+      } else if (lower.includes("hr") || lower.includes("human capital") || lower.includes("retention") || lower.includes("people analytics")) {
+        botReply = "Jami is an accredited Certified Career Coach (ICCC Foundation) and strategic talent architect. He designs predictive workforce retention models and people analytics systems, having completed verified executive workforce advisory simulations with Accenture Nordics.";
+      } else if (lower.includes("google") || lower.includes("ambassador")) {
+        botReply = "Jami serves as the Google Campus Ambassador '26, evangelizing Google Gemini multimodality, developer ecosystems, and hosting hands-on workshops on applied Generative AI across regional universities.";
+      } else if (lower.includes("contact") || lower.includes("email") || lower.includes("phone") || lower.includes("reach") || lower.includes("hire") || lower.includes("briefing") || lower.includes("consult")) {
+        botReply = "You can initiate a confidential executive briefing with Jami via email at jamianil37@gmail.com, direct WhatsApp/call at +91 63015 88867, or by submitting your requirements in the Consultation Briefing Portal below.";
+      } else if (lower.includes("certif") || lower.includes("credential")) {
+        botReply = "Jami holds verified credentials including: Accenture Nordics Workforce Advisory Simulation (Forage), Google Cloud & Gemini AI Badges, Udemy Professional Instructor & Instructor Rookery Scholar, ICCC Foundation Certified Career Coach, and PGDCA (Honors A+).";
       } else if (lower.includes("hello") || lower.includes("hi") || lower.includes("hey")) {
-        botReply = "Hello! Great to connect with you. What would you like to explore today?";
+        botReply = "Hello! Welcome to Jami Eswar Anil Kumar's executive portal. Would you like to know more about his AI architecture, Vyntyra Consultancy, academic pedigree, or schedule a strategic briefing?";
       }
 
       setMessages((prev) => [
         ...prev,
         {
-          sender: "feddy",
+          sender: "assistant",
           text: botReply,
           time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
         },
       ]);
       setIsTyping(false);
-    }, 900);
+    }, 850);
   };
 
   const handleRefresh = () => {
     setMessages([
       {
-        sender: "feddy",
-        text: "Hello! I'm Feddy, your personal digital assistant. How can I help you today?",
+        sender: "assistant",
+        text: "Hello! I am Jami Eswar Anil Kumar's Executive AI Assistant. How can I help you today with Jami's strategic consulting or portfolio details?",
         time: "Just now",
       },
     ]);
@@ -102,28 +116,28 @@ export default function FeddyChatbot() {
 
   return (
     <>
-      {/* Floating Bottom Avatar Trigger Widget */}
+      {/* Floating Bottom Executive AI Trigger Widget */}
       <div className={styles.floatingTriggerWrapper}>
         <motion.button
           type="button"
           className={styles.floatingAvatarBtn}
           onClick={() => setIsOpen(!isOpen)}
-          aria-label="Open Feddy AI Assistant"
+          aria-label="Open Jami Eswar Anil Kumar Executive AI Assistant"
           whileHover={{ scale: 1.06 }}
           whileTap={{ scale: 0.95 }}
         >
           <div className={styles.avatarImgBox}>
             <img
-              src="/images/feddy-three.png?version=1790749947"
-              alt="Feddy logo"
-              className={styles.main__topSection__logo}
+              src="/Profile.webp"
+              alt="Jami Eswar Anil Kumar"
+              className={styles.executiveTriggerAvatar}
             />
           </div>
           <div className={styles.pulseRing} />
           <div className={styles.onlineBadge} />
         </motion.button>
 
-        {/* Floating Tooltip hint */}
+        {/* Floating Tooltip Hint */}
         {!isOpen && (
           <motion.div
             className={styles.floatingTooltip}
@@ -132,13 +146,14 @@ export default function FeddyChatbot() {
             transition={{ delay: 1 }}
             onClick={() => setIsOpen(true)}
           >
-            <span>Ask Feddy</span>
             <i className="fa-solid fa-sparkles" />
+            <span>Ask Jami AI</span>
+            <span className={styles.tooltipAIBadge}>24/7</span>
           </motion.div>
         )}
       </div>
 
-      {/* Feddy Chatbot Modal Popup (Exact Design Matching Screenshot) */}
+      {/* Executive AI Assistant Modal Popup (Corporate-Grade Luxury Architecture) */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -150,38 +165,36 @@ export default function FeddyChatbot() {
           >
             <motion.div
               className={styles.popupContainer}
-              initial={{ opacity: 0, scale: 0.9, y: 30 }}
+              initial={{ opacity: 0, scale: 0.92, y: 25 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ type: "spring", stiffness: 350, damping: 28 }}
+              exit={{ opacity: 0, scale: 0.92, y: 15 }}
+              transition={{ type: "spring", stiffness: 360, damping: 28 }}
               onClick={(e) => e.stopPropagation()}
               role="dialog"
               aria-modal="true"
-              aria-label="Feddy Digital Assistant"
+              aria-label="Jami Eswar Anil Kumar Executive AI Assistant"
             >
-              {/* Top Navigation Bar */}
+              {/* Corporate Top Navigation Bar */}
               <div className={styles.popupTopBar}>
                 <button
                   type="button"
                   className={styles.barIconBtn}
                   onClick={() => setViewMode(viewMode === "welcome" ? "chat" : "welcome")}
-                  aria-label="Menu"
-                  title="Toggle Menu / View"
+                  aria-label="Toggle View"
+                  title="Toggle Overview / Dialogue"
                 >
                   <i className="fa-solid fa-bars" />
                 </button>
 
-                <div className={styles.federalBankLogoBox}>
-                  <img
-                    src="/images/federal-bank-logo.png"
-                    alt="Federal Bank"
-                    className={styles.bankLogoImg}
-                    onError={(e) => {
-                      // Fallback text if image not rendered
-                      (e.currentTarget as HTMLElement).style.display = "none";
-                    }}
-                  />
-                  <span className={styles.bankLogoFallback}>Federal Bank</span>
+                <div className={styles.brandTitleBox}>
+                  <div className={styles.miniMonogram}>JEAK</div>
+                  <div className={styles.brandMetaGroup}>
+                    <div className={styles.brandNameLine}>
+                      <span className={styles.brandName}>JAMI ESWAR ANIL KUMAR</span>
+                      <i className="fa-solid fa-circle-check" title="Verified Director" />
+                    </div>
+                    <span className={styles.brandRoleText}>Executive AI Intelligence Concierge</span>
+                  </div>
                 </div>
 
                 <div className={styles.topRightActions}>
@@ -190,7 +203,7 @@ export default function FeddyChatbot() {
                     className={styles.barIconBtn}
                     onClick={handleRefresh}
                     aria-label="Refresh conversation"
-                    title="Refresh Chat"
+                    title="Reset Session"
                   >
                     <i className="fa-solid fa-arrows-rotate" />
                   </button>
@@ -198,7 +211,7 @@ export default function FeddyChatbot() {
                     type="button"
                     className={styles.barCloseBtn}
                     onClick={() => setIsOpen(false)}
-                    aria-label="Close assistant"
+                    aria-label="Close Assistant"
                     title="Close"
                   >
                     <i className="fa-solid fa-xmark" />
@@ -206,36 +219,43 @@ export default function FeddyChatbot() {
                 </div>
               </div>
 
-              {/* View 1: Welcome Screen (Exact Replica of User Screenshot) */}
+              {/* View 1: Welcome Executive Screen */}
               {viewMode === "welcome" ? (
                 <div className={styles.welcomeScrollBody}>
                   {/* Greeting Hero Card */}
                   <div className={styles.greetingCard}>
                     <div className={styles.greetingLeft}>
+                      <span className={styles.executivePillBadge}>
+                        <span className="status-pulse" />
+                        <span>Executive Intelligence Live</span>
+                      </span>
                       <h2 className={styles.greetingTitle}>{greeting}</h2>
                       <p className={styles.greetingSubtitle}>
-                        I'm Feddy, Federal Bank's personal digital assistant. You can ask me about banking and I'll help you.
+                        I am Jami's Executive Digital Assistant. Inquire about his corporate advisory, AI systems engineering, academic pedigree, or schedule a strategic briefing.
                       </p>
                     </div>
                     <div className={styles.greetingAvatarWrap}>
                       <img
-                        src="/images/feddy-avatar.png"
-                        alt="Feddy Avatar"
+                        src="/Profile.webp"
+                        alt="Jami Eswar Anil Kumar Portrait"
                         className={styles.torsoAvatarImg}
-                        onError={(e) => {
-                          (e.currentTarget as HTMLImageElement).src = "/images/feddy-three.png?version=1790749947";
-                        }}
                       />
                     </div>
                   </div>
 
-                  {/* Main FEDDY Feature Section */}
+                  {/* Main JEAK AI Feature Section */}
                   <div className={styles.mainFeatureSection}>
-                    <h1 className={styles.feddyBrandHeading}>FEDDY</h1>
-                    <h3 className={styles.feddyTagline}>Your True Banking Assistant</h3>
-                    <h4 className={styles.conversationalSubheading}>Experience Conversational Banking</h4>
+                    <div className={styles.featureHeaderRow}>
+                      <div>
+                        <h1 className={styles.feddyBrandHeading}>JEAK AI</h1>
+                        <h3 className={styles.feddyTagline}>Executive Advisory & Systems Assistant</h3>
+                      </div>
+                      <span className={styles.corporatePillTag}>Vyntyra Desk</span>
+                    </div>
+
+                    <h4 className={styles.conversationalSubheading}>Conversational Executive Intelligence</h4>
                     <p className={styles.feddyDescription}>
-                      Quickly send money with Feddy! Just say, “Send 100 Rs to My Mom” or “Pay my Electricity Bill”. Have banking queries? Simply log in or enter your name to get started as a guest. It's that easy!
+                      Query Jami's dual academic pedigree (B.Tech AI/ML @ AITAM & BBA @ University of the People, USA), his leadership at Vyntyra Consultancy Services, workforce retention architectures, or request a direct corporate consultation.
                     </p>
 
                     {/* Quick Interactive Prompt Options */}
@@ -243,30 +263,44 @@ export default function FeddyChatbot() {
                       <button
                         type="button"
                         className={styles.promptPill}
-                        onClick={() => handleSendMessage("Tell me about Federal Bank personal banking options")}
+                        onClick={() => handleSendMessage("Who is Jami Eswar Anil Kumar and what is his vision?")}
                       >
-                        💳 Banking & Accounts
+                        👤 Founder Profile & Vision
                       </button>
                       <button
                         type="button"
                         className={styles.promptPill}
-                        onClick={() => handleSendMessage("How can I send money or pay utility bills?")}
+                        onClick={() => handleSendMessage("What does Vyntyra Consultancy Services and Vyntyra Academy do?")}
                       >
-                        ⚡ Money Transfers & Bills
+                        🏢 Vyntyra Consultancy & Academy
                       </button>
                       <button
                         type="button"
                         className={styles.promptPill}
-                        onClick={() => handleSendMessage("Tell me about Jami Eswar Anil Kumar's executive AI advisory")}
+                        onClick={() => handleSendMessage("Tell me about Jami's dual academic pedigree at AITAM and University of the People")}
                       >
-                        🤖 Jami's AI Advisory
+                        🎓 Dual Academic Pedigree
                       </button>
                       <button
                         type="button"
                         className={styles.promptPill}
-                        onClick={() => handleSendMessage("What does Vyntyra Consultancy Services offer?")}
+                        onClick={() => handleSendMessage("What are Jami's core competencies in Enterprise AI and Machine Learning?")}
                       >
-                        🏢 Vyntyra Consultancy
+                        🧠 Enterprise AI & ML Systems
+                      </button>
+                      <button
+                        type="button"
+                        className={styles.promptPill}
+                        onClick={() => handleSendMessage("Explain Jami's Human Capital Architecture and Career Coaching credentials")}
+                      >
+                        👥 Human Capital & People Analytics
+                      </button>
+                      <button
+                        type="button"
+                        className={styles.promptPill}
+                        onClick={() => handleSendMessage("How can I initiate an executive consultation briefing with Jami?")}
+                      >
+                        📅 Schedule Advisory Briefing
                       </button>
                     </div>
 
@@ -277,19 +311,22 @@ export default function FeddyChatbot() {
                       onClick={() => setViewMode("chat")}
                     >
                       <i className="fa-regular fa-comment-dots" />
-                      <span>Start Interactive Chat</span>
+                      <span>Start Interactive Executive Session</span>
                     </button>
                   </div>
 
-                  {/* Maintenance Notice Box Matching Screenshot */}
+                  {/* Corporate Governance Notice Box */}
                   <div className={styles.maintenanceNoticeBox}>
                     <p>
-                      <strong>Feddy is undergoing maintenance,</strong> kindly visit after some time. Thanks for your patience.
+                      <i className="fa-solid fa-shield-halved" />
+                      <span>
+                        <strong>Official AI Representative</strong> of Jami Eswar Anil Kumar • Vyntyra Consultancy Services. Available 24/7 for international advisory inquiries.
+                      </span>
                     </p>
                   </div>
                 </div>
               ) : (
-                /* View 2: Live Chat Interface */
+                /* View 2: Live Chat Dialogue Interface */
                 <div className={styles.chatInterface}>
                   <div className={styles.chatMessageList}>
                     {messages.map((msg, i) => (
@@ -297,9 +334,9 @@ export default function FeddyChatbot() {
                         key={i}
                         className={`${styles.messageRow} ${msg.sender === "user" ? styles.messageRowUser : styles.messageRowFeddy}`}
                       >
-                        {msg.sender === "feddy" && (
+                        {msg.sender === "assistant" && (
                           <div className={styles.feddyMiniAvatar}>
-                            <img src="/images/feddy-avatar.png" alt="Feddy" />
+                            <img src="/Profile.webp" alt="Jami AI" />
                           </div>
                         )}
                         <div className={`${styles.bubble} ${msg.sender === "user" ? styles.bubbleUser : styles.bubbleFeddy}`}>
@@ -312,7 +349,7 @@ export default function FeddyChatbot() {
                     {isTyping && (
                       <div className={`${styles.messageRow} ${styles.messageRowFeddy}`}>
                         <div className={styles.feddyMiniAvatar}>
-                          <img src="/images/feddy-avatar.png" alt="Feddy" />
+                          <img src="/Profile.webp" alt="Jami AI" />
                         </div>
                         <div className={`${styles.bubble} ${styles.bubbleFeddy} ${styles.typingBubble}`}>
                           <span className={styles.typingDot} />
@@ -336,7 +373,7 @@ export default function FeddyChatbot() {
                       type="text"
                       value={inputMessage}
                       onChange={(e) => setInputMessage(e.target.value)}
-                      placeholder="Type your query to Feddy..."
+                      placeholder="Ask about Jami's advisory, AI systems, pedigree..."
                       className={styles.chatInput}
                     />
                     <button type="submit" className={styles.chatSendBtn} aria-label="Send Message">

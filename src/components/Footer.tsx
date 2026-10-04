@@ -3,8 +3,9 @@
 import styles from "./Footer.module.css";
 
 export default function Footer() {
-  const openFeddyChatbot = () => {
+  const openExecutiveAI = () => {
     if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event("open-executive-ai"));
       window.dispatchEvent(new Event("open-feddy-chatbot"));
     }
   };
@@ -12,154 +13,168 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
-        {/* Interactive Feddy Assistant Spotlight Showcase Card */}
+        {/* Executive AI Intelligence Concierge Spotlight Card */}
         <div
-          className={styles.feddySpotlight}
-          onClick={openFeddyChatbot}
+          className={styles.executiveSpotlight}
+          onClick={openExecutiveAI}
           role="button"
           tabIndex={0}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
               e.preventDefault();
-              openFeddyChatbot();
+              openExecutiveAI();
             }
           }}
-          aria-label="Open Feddy Digital Assistant Chatbot"
+          aria-label="Open Jami Eswar Anil Kumar Executive AI Assistant"
         >
-          <div className={styles.feddySpotlightVisual}>
-            <img
-              src="/images/feddy-three.png?version=1790749947"
-              alt="Feddy logo"
-              className="main__topSection__logo"
-            />
-            <div className={styles.feddySpotlightPulse} />
+          <div className={styles.spotlightVisual}>
+            <div className={styles.spotlightAvatarBox}>
+              <img
+                src="/Profile.webp"
+                alt="Jami Eswar Anil Kumar"
+                className={styles.spotlightAvatarImg}
+              />
+              <span className={styles.avatarOnlineDot} />
+            </div>
+            <div className={styles.spotlightPulseRing} />
           </div>
-          <div className={styles.feddySpotlightContent}>
-            <div className={styles.feddySpotlightHeader}>
-              <span className={styles.feddyTag}>FEDERAL BANK • DIGITAL ASSISTANT</span>
-              <span className={styles.feddyStatusBadge}>
+
+          <div className={styles.spotlightContent}>
+            <div className={styles.spotlightHeader}>
+              <span className={styles.corporateBadgeTag}>VYNTYRA CONSULTANCY SERVICES • EXECUTIVE AI DESK</span>
+              <span className={styles.statusLivePill}>
                 <span className="status-pulse" />
-                <span>24/7 AI Conversational Banking</span>
+                <span>24/7 Conversational Executive Advisory</span>
               </span>
             </div>
-            <h3 className={styles.feddySpotlightTitle}>Meet Feddy — Your True Banking & Advisory Assistant</h3>
-            <p className={styles.feddySpotlightDesc}>
-              Quickly send money, pay bills, inspect accounts, or query Jami Eswar Anil Kumar's executive AI & enterprise advisory desk. Tap to open the interactive assistant modal!
+            <h3 className={styles.spotlightTitle}>
+              Connect with Jami&apos;s Interactive Executive AI Assistant
+            </h3>
+            <p className={styles.spotlightDesc}>
+              Inquire into enterprise AI architectures, workforce retention models, dual academic pedigree (B.Tech AI/ML &amp; BBA USA), or schedule a confidential advisory consultation. Tap to launch the interactive executive assistant.
             </p>
           </div>
-          <div className={styles.feddySpotlightAction}>
-            <span className={styles.feddyActionBtn}>
-              <span>Launch Feddy</span>
+
+          <div className={styles.spotlightAction}>
+            <span className={styles.spotlightActionBtn}>
+              <i className="fa-solid fa-sparkles" />
+              <span>Launch Executive AI</span>
               <i className="fa-solid fa-arrow-right" />
             </span>
           </div>
         </div>
 
-        {/* High-Quality Executive Luxury Icon Strip */}
-        <div className={styles.luxuryNetworksSection}>
+        {/* Corporate Verified Channels & Networks */}
+        <div className={styles.networksSection}>
           <div className={styles.networksHeader}>
-            <span className={styles.networksTitle}>Verified Executive Channels & Networks</span>
+            <span className={styles.networksTitle}>Verified Executive Channels &amp; Representation</span>
             <span className={styles.networksSub}>Enterprise communication grade • ISO/IEC 40500 compliant</span>
           </div>
-          <div className={styles.luxuryNetworks}>
+
+          <div className={styles.networksGrid}>
             <a
               href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.luxuryPill}
-              aria-label="LinkedIn Executive Profile"
+              className={styles.networkPill}
+              aria-label="LinkedIn Executive Network"
             >
-              <div className={`${styles.iconCircle} ${styles.iconLinkedin}`}>
+              <div className={`${styles.iconWrap} ${styles.iconLinkedin}`}>
                 <i className="fa-brands fa-linkedin-in" />
               </div>
-              <div className={styles.pillMeta}>
-                <span className={styles.pillLabel}>LinkedIn</span>
-                <span className={styles.pillDetail}>Executive Network</span>
+              <div className={styles.pillText}>
+                <span className={styles.pillHeading}>LinkedIn</span>
+                <span className={styles.pillSub}>Executive Thought Leadership</span>
               </div>
-              <i className={`fa-solid fa-arrow-up-right-from-square ${styles.externalIcon}`} />
+              <i className={`fa-solid fa-arrow-up-right-from-square ${styles.pillArrow}`} />
             </a>
 
             <a
               href="https://github.com/JAMIESWARANILKUMAR"
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.luxuryPill}
-              aria-label="GitHub Engineering Profile"
+              className={styles.networkPill}
+              aria-label="GitHub System Architecture Profile"
             >
-              <div className={`${styles.iconCircle} ${styles.iconGithub}`}>
+              <div className={`${styles.iconWrap} ${styles.iconGithub}`}>
                 <i className="fa-brands fa-github" />
               </div>
-              <div className={styles.pillMeta}>
-                <span className={styles.pillLabel}>GitHub</span>
-                <span className={styles.pillDetail}>System Architecture</span>
+              <div className={styles.pillText}>
+                <span className={styles.pillHeading}>GitHub</span>
+                <span className={styles.pillSub}>AI Systems &amp; Repositories</span>
               </div>
-              <i className={`fa-solid fa-arrow-up-right-from-square ${styles.externalIcon}`} />
+              <i className={`fa-solid fa-arrow-up-right-from-square ${styles.pillArrow}`} />
             </a>
 
             <a
               href="https://wa.me/916301588867"
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.luxuryPill}
-              aria-label="WhatsApp Executive Channel"
+              className={styles.networkPill}
+              aria-label="WhatsApp Executive Direct Advisory Desk"
             >
-              <div className={`${styles.iconCircle} ${styles.iconWhatsapp}`}>
+              <div className={`${styles.iconWrap} ${styles.iconWhatsapp}`}>
                 <i className="fa-brands fa-whatsapp" />
               </div>
-              <div className={styles.pillMeta}>
-                <span className={styles.pillLabel}>WhatsApp</span>
-                <span className={styles.pillDetail}>+91 63015 88867</span>
+              <div className={styles.pillText}>
+                <span className={styles.pillHeading}>WhatsApp</span>
+                <span className={styles.pillSub}>Direct Executive Desk (+91 63015 88867)</span>
               </div>
-              <i className={`fa-solid fa-arrow-up-right-from-square ${styles.externalIcon}`} />
+              <i className={`fa-solid fa-arrow-up-right-from-square ${styles.pillArrow}`} />
             </a>
 
             <a
               href="mailto:jamianil37@gmail.com"
-              className={styles.luxuryPill}
-              aria-label="Email Executive Office"
+              className={styles.networkPill}
+              aria-label="Corporate Email Inquiries"
             >
-              <div className={`${styles.iconCircle} ${styles.iconEmail}`}>
+              <div className={`${styles.iconWrap} ${styles.iconEmail}`}>
                 <i className="fa-solid fa-envelope" />
               </div>
-              <div className={styles.pillMeta}>
-                <span className={styles.pillLabel}>Email</span>
-                <span className={styles.pillDetail}>jamianil37@gmail.com</span>
+              <div className={styles.pillText}>
+                <span className={styles.pillHeading}>Corporate Email</span>
+                <span className={styles.pillSub}>jamianil37@gmail.com</span>
               </div>
-              <i className={`fa-solid fa-arrow-up-right-from-square ${styles.externalIcon}`} />
+              <i className={`fa-solid fa-arrow-up-right-from-square ${styles.pillArrow}`} />
             </a>
 
             <a
               href="tel:+916301588867"
-              className={styles.luxuryPill}
-              aria-label="Direct Phone Consultation"
+              className={styles.networkPill}
+              aria-label="Direct Consultation Hotline"
             >
-              <div className={`${styles.iconCircle} ${styles.iconPhone}`}>
+              <div className={`${styles.iconWrap} ${styles.iconPhone}`}>
                 <i className="fa-solid fa-phone" />
               </div>
-              <div className={styles.pillMeta}>
-                <span className={styles.pillLabel}>Advisory Line</span>
-                <span className={styles.pillDetail}>Direct Consultation</span>
+              <div className={styles.pillText}>
+                <span className={styles.pillHeading}>Advisory Line</span>
+                <span className={styles.pillSub}>Confidential Voice Briefing</span>
               </div>
-              <i className={`fa-solid fa-arrow-up-right-from-square ${styles.externalIcon}`} />
+              <i className={`fa-solid fa-arrow-up-right-from-square ${styles.pillArrow}`} />
             </a>
           </div>
         </div>
 
-        {/* Main Footer Directory Grid */}
-        <div className={styles.topRow}>
-          {/* Brand Column */}
+        {/* Corporate Directory Sitemap */}
+        <div className={styles.directoryGrid}>
+          {/* Brand & Manifesto Column */}
           <div className={styles.brandCol}>
             <div className={styles.brandBadge}>
               <span className={styles.monogram}>JEAK</span>
               <div className={styles.brandInfo}>
-                <span className={styles.name}>JAMI ESWAR ANIL KUMAR</span>
-                <span className={styles.title}>Founder & Director • Vyntyra Consultancy Services</span>
+                <div className={styles.nameRow}>
+                  <span className={styles.name}>JAMI ESWAR ANIL KUMAR</span>
+                  <i className="fa-solid fa-circle-check" title="Verified Director" />
+                </div>
+                <span className={styles.title}>Founder &amp; Executive Director • Vyntyra Consultancy Services</span>
               </div>
             </div>
+
             <p className={styles.brandThesis}>
-              Bridging enterprise artificial intelligence systems with strategic human capital governance to 
+              Synthesizing enterprise artificial intelligence systems with strategic human capital governance to 
               architect resilient, scalable, and high-retention corporate organizations.
             </p>
+
             <div className={styles.complianceRow}>
               <div className={styles.complianceTag}>
                 <i className="fa-solid fa-certificate" />
@@ -173,12 +188,12 @@ export default function Footer() {
           </div>
 
           {/* Quick Links Sitemaps */}
-          <div className={styles.linksGrid}>
+          <div className={styles.linksColumns}>
             <div className={styles.linkGroup}>
               <span className={styles.groupHeading}>Executive Dossier</span>
               <ul>
-                <li><a href="#about">Founder Profile & Vision</a></li>
-                <li><a href="#education">Academic Pedigree & Governance</a></li>
+                <li><a href="#about">Founder Profile &amp; Vision</a></li>
+                <li><a href="#education">Academic Pedigree &amp; Governance</a></li>
                 <li><a href="#skills">Strategic Competencies Matrix</a></li>
                 <li><a href="#experience">Leadership Milestone Track</a></li>
                 <li><a href="#certifications">Verified Credentials Hub</a></li>
@@ -190,33 +205,34 @@ export default function Footer() {
               <ul>
                 <li><a href="#projects">Vyntyra Consultancy Services</a></li>
                 <li><a href="#projects">Enterprise AI Architecture</a></li>
-                <li><a href="#projects">Human Capital & Retention Design</a></li>
+                <li><a href="#projects">Human Capital &amp; Retention Design</a></li>
                 <li><a href="#projects">Vyntyra Academy National Cohorts</a></li>
                 <li><a href="#contact">Consultation Briefing Portal</a></li>
               </ul>
             </div>
 
             <div className={styles.linkGroup}>
-              <span className={styles.groupHeading}>Executive Channels</span>
+              <span className={styles.groupHeading}>Institutional Coordinates</span>
               <ul>
+                <li><span className={styles.coordLabel}>Regional HQ:</span> Srikakulam, AP, India</li>
+                <li><span className={styles.coordLabel}>International:</span> Pasadena, CA, USA</li>
+                <li><span className={styles.coordLabel}>Timezone:</span> IST (UTC+5:30)</li>
                 <li><a href="mailto:jamianil37@gmail.com">jamianil37@gmail.com</a></li>
                 <li><a href="https://wa.me/916301588867" target="_blank" rel="noopener noreferrer">+91 63015 88867</a></li>
-                <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn Executive Profile</a></li>
-                <li><a href="https://github.com/JAMIESWARANILKUMAR" target="_blank" rel="noopener noreferrer">GitHub Engineering Profile</a></li>
               </ul>
             </div>
           </div>
         </div>
 
-        {/* Bottom Copyright & Verification Line */}
+        {/* Bottom Legal & Compliance Line */}
         <div className={styles.bottomRow}>
           <p className={styles.copyright}>
             © {new Date().getFullYear()} Jami Eswar Anil Kumar. All rights reserved. Directed by Vyntyra Consultancy Services.
           </p>
           <div className={styles.footnoteLinks}>
-            <span>Confidential Executive Portal</span>
+            <span>Confidential Corporate Portal</span>
             <span className={styles.divider}>•</span>
-            <span>Srikakulam, AP, India (IST • UTC+5:30)</span>
+            <span>ISO/IEC 40500 (WCAG 2.1 AA) Validated</span>
             <span className={styles.divider}>•</span>
             <a href="#overview">Back to Top ↑</a>
           </div>

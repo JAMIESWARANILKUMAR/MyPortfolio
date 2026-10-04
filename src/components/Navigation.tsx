@@ -4,105 +4,111 @@ import { useState, useEffect, useRef } from "react";
 import styles from "./Navigation.module.css";
 import { motion, AnimatePresence } from "framer-motion";
 
-const INDIAN_LANGUAGES = [
-  { code: "hi", native: "हिन्दी", label: "Hindi", region: "North & Central India" },
-  { code: "te", native: "తెలుగు", label: "Telugu", region: "Andhra Pradesh & Telangana" },
-  { code: "ta", native: "தமிழ்", label: "Tamil", region: "Tamil Nadu" },
-  { code: "bn", native: "বাংলা", label: "Bengali", region: "West Bengal" },
-  { code: "mr", native: "मराठी", label: "Marathi", region: "Maharashtra" },
-  { code: "kn", native: "ಕನ್ನಡ", label: "Kannada", region: "Karnataka" },
-  { code: "ml", native: "മലയാളം", label: "Malayalam", region: "Kerala" },
-  { code: "gu", native: "ગુજરાતી", label: "Gujarati", region: "Gujarat" },
-  { code: "pa", native: "ਪੰਜਾਬੀ", label: "Punjabi", region: "Punjab" },
-  { code: "or", native: "ଓଡ଼ିଆ", label: "Odia", region: "Odisha" },
-  { code: "as", native: "অসমীয়া", label: "Assamese", region: "Assam" },
-  { code: "ur", native: "اردو", label: "Urdu", region: "National / South Asia" },
-];
-
-declare global {
-  interface Window {
-    googleTranslateElementInit?: () => void;
-    google?: {
-      translate?: {
-        TranslateElement?: new (options: { pageLanguage: string; layout?: number }, el: string) => void;
-      };
-    };
-  }
+interface Language {
+  code: string;
+  label: string;
+  native: string;
+  region: string;
 }
 
+const INDIAN_LANGUAGES: Language[] = [
+  { code: "hi", label: "Hindi", native: "हिन्दी", region: "National / North India" },
+  { code: "te", label: "Telugu", native: "తెలుగు", region: "Andhra Pradesh & Telangana" },
+  { code: "ta", label: "Tamil", native: "தமிழ்", region: "Tamil Nadu & Puducherry" },
+  { code: "bn", label: "Bengali", native: "বাংলা", region: "West Bengal & Tripura" },
+  { code: "mr", label: "Marathi", native: "मराठी", region: "Maharashtra" },
+  { code: "gu", label: "Gujarati", native: "ગુજરાતી", region: "Gujarat" },
+  { code: "kn", label: "Kannada", native: "ಕನ್ನಡ", region: "Karnataka" },
+  { code: "ml", label: "Malayalam", native: "മലയാളം", region: "Kerala" },
+  { code: "pa", label: "Punjabi", native: "ਪੰਜਾਬੀ", region: "Punjab" },
+  { code: "or", label: "Odia", native: "ଓଡ଼ିଆ", region: "Odisha" },
+  { code: "as", label: "Assamese", native: "অসমীয়া", region: "Assam" },
+  { code: "ur", label: "Urdu", native: "اردو", region: "Pan-India" },
+  { code: "sa", label: "Sanskrit", native: "संस्कृतम्", region: "Classical" },
+  { code: "ne", label: "Nepali", native: "नेपाली", region: "Sikkim & West Bengal" },
+  { code: "sd", label: "Sindhi", native: "سنڌي", region: "Pan-India" },
+  { code: "kok", label: "Konkani", native: "कोंकणी", region: "Goa & Maharashtra" },
+  { code: "mai", label: "Maithili", native: "मैथिली", region: "Bihar" },
+  { code: "dog", label: "Dogri", native: "डोगरी", region: "Jammu & Kashmir" },
+  { code: "mni", label: "Manipuri", native: "মৈতৈলোন্", region: "Manipur" },
+  { code: "bho", label: "Bhojpuri", native: "भोजपुरी", region: "UP & Bihar" },
+];
+
 export default function Navigation() {
-  const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("overview");
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
-  const [activeLang, setActiveLang] = useState<string | null>(null);
   const [langSearch, setLangSearch] = useState("");
+  const [activeLang, setActiveLang] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Google Translate Initialization
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+
+      const sections = ["overview", "about", "education", "skills", "experience", "certifications", "projects", "tools", "contact"];
+      const current = sections.find((section) => {
+        const el = document.getElementById(section);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          return rect.top <= 120 && rect.bottom >= 120;
+        }
+        return false;
+      });
+      if (current) setActiveSection(current);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Close language dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setLangDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Initialize Google Translate Element once
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
     if (!document.getElementById("google-translate-script")) {
-      window.googleTranslateElementInit = () => {
-        if (window.google?.translate?.TranslateElement) {
-          new window.google.translate.TranslateElement(
-            { pageLanguage: "en", layout: 0 },
+      const script = document.createElement("script");
+      script.id = "google-translate-script";
+      script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInitNav";
+      script.async = true;
+      document.body.appendChild(script);
+
+      (window as unknown as { googleTranslateElementInitNav: () => void }).googleTranslateElementInitNav = () => {
+        const google = (window as unknown as { google: { translate: { TranslateElement: new (opts: object, id: string) => void } } }).google;
+        if (google?.translate?.TranslateElement) {
+          new google.translate.TranslateElement(
+            {
+              pageLanguage: "en",
+              includedLanguages: "en,hi,te,ta,bn,mr,gu,kn,ml,pa,or,as,ur,sa,ne,sd,kok,mai,mni,bho",
+              autoDisplay: false,
+            },
             "google_translate_element_nav"
           );
         }
       };
-
-      const script = document.createElement("script");
-      script.id = "google-translate-script";
-      script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-      script.async = true;
-      document.body.appendChild(script);
     }
-
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 25);
-
-      const sections = document.querySelectorAll("section[id]");
-      let current = "";
-      sections.forEach((section) => {
-        const top = (section as HTMLElement).offsetTop;
-        if (window.scrollY >= top - 200) {
-          current = section.getAttribute("id") || "";
-        }
-      });
-      setActiveSection(current);
-    };
-
-    const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setLangDropdownOpen(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
   }, []);
 
   const triggerTranslation = (langCode: string) => {
     setActiveLang(langCode);
     setLangDropdownOpen(false);
-    setIsOpen(false);
-
-    const tryTranslate = (attempts = 0) => {
-      const select = document.querySelector<HTMLSelectElement>(".goog-te-combo");
-      if (select) {
-        select.value = langCode;
-        select.dispatchEvent(new Event("change"));
-      } else if (attempts < 20) {
-        setTimeout(() => tryTranslate(attempts + 1), 250);
-      }
-    };
-
-    tryTranslate();
+    const select = document.querySelector<HTMLSelectElement>(".goog-te-combo");
+    if (select) {
+      select.value = langCode;
+      select.dispatchEvent(new Event("change"));
+    }
   };
 
   const resetToEnglish = () => {
@@ -115,9 +121,10 @@ export default function Navigation() {
     }
   };
 
-  const openFeddyChatbot = () => {
+  const openExecutiveAI = () => {
     setIsOpen(false);
     if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event("open-executive-ai"));
       window.dispatchEvent(new Event("open-feddy-chatbot"));
     }
   };
@@ -156,7 +163,7 @@ export default function Navigation() {
                   <i className="fa-solid fa-circle-check" />
                 </span>
               </div>
-              <span className={styles.brandRole}>Founder & Director • Vyntyra Consultancy</span>
+              <span className={styles.brandRole}>FOUNDER &amp; DIRECTOR • VYNTYRA CONSULTANCY</span>
             </div>
           </a>
 
@@ -183,28 +190,24 @@ export default function Navigation() {
             })}
           </nav>
 
-          {/* Right Action Suite (Feddy Chatbot, Locale Selector & Consultation CTA) */}
+          {/* Right Action Suite (Executive AI, Locale Selector & Consultation CTA) */}
           <div className={styles.actions}>
-            {/* Feddy AI Chatbot Button */}
+            {/* Executive AI Assistant Button */}
             <button
               type="button"
-              onClick={openFeddyChatbot}
-              className={styles.feddyHeaderBtn}
-              title="Chat with Feddy AI Digital Assistant"
-              aria-label="Open Feddy Digital Assistant"
+              onClick={openExecutiveAI}
+              className={styles.executiveAIBtn}
+              title="Open Jami Eswar Anil Kumar Executive AI Assistant"
+              aria-label="Open Executive AI Assistant"
             >
-              <div className={styles.feddyAvatarCircle}>
-                <img
-                  src="/images/feddy-three.png?version=1790749947"
-                  alt="Feddy logo"
-                  className={styles.feddyHeaderAvatar}
-                />
+              <div className={styles.aiIconPulse}>
+                <i className="fa-solid fa-sparkles" />
               </div>
-              <span className={styles.feddyHeaderText}>Ask Feddy</span>
-              <span className={styles.feddyHeaderBadge}>AI</span>
+              <span className={styles.aiBtnText}>Executive AI</span>
+              <span className={styles.aiLiveBadge}>24/7</span>
             </button>
 
-            {/* Integrated Indian Language Locale Selector with Filter */}
+            {/* Integrated Indian Language Locale Selector */}
             <div className={styles.localeWrapper} ref={dropdownRef}>
               <button
                 type="button"
@@ -213,7 +216,7 @@ export default function Navigation() {
                 aria-expanded={langDropdownOpen}
                 aria-label="Select Regional Indian Language"
               >
-                <i className="fa-solid fa-language" />
+                <i className="fa-solid fa-globe" />
                 <span className={styles.localeText}>
                   {activeLang ? INDIAN_LANGUAGES.find((l) => l.code === activeLang)?.native : "IN Languages"}
                 </span>
@@ -303,29 +306,29 @@ export default function Navigation() {
             <div className={styles.mobileDrawerInner}>
               <div className={styles.mobileStatusBadge}>
                 <span className="status-pulse" />
-                <span>Available for Advisory & High-Impact Consulting</span>
+                <span>Available for Advisory &amp; Enterprise Governance</span>
               </div>
 
-              {/* Mobile Feddy AI Assistant Feature Card */}
+              {/* Mobile Executive AI Assistant Feature Card */}
               <div
-                className={styles.mobileFeddyCard}
-                onClick={openFeddyChatbot}
+                className={styles.mobileExecutiveAICard}
+                onClick={openExecutiveAI}
                 role="button"
                 tabIndex={0}
               >
-                <div className={styles.mobileFeddyAvatar}>
+                <div className={styles.mobileAIAvatar}>
                   <img
-                    src="/images/feddy-three.png?version=1790749947"
-                    alt="Feddy logo"
-                    className="main__topSection__logo"
+                    src="/Profile.webp"
+                    alt="Jami Eswar Anil Kumar"
                   />
+                  <span className={styles.mobileAIOnlineDot} />
                 </div>
-                <div className={styles.mobileFeddyInfo}>
-                  <div className={styles.mobileFeddyTitleRow}>
-                    <strong>Ask Feddy AI Assistant</strong>
-                    <span className={styles.mobileFeddyBadge}>Digital Assistant</span>
+                <div className={styles.mobileAIInfo}>
+                  <div className={styles.mobileAITitleRow}>
+                    <strong>Ask Executive AI Assistant</strong>
+                    <span className={styles.mobileAIBadge}>Active 24/7</span>
                   </div>
-                  <span>Instant banking & advisory questions. Tap to launch!</span>
+                  <span>Instant dossier insights &amp; advisory queries. Tap to launch!</span>
                 </div>
                 <i className="fa-solid fa-chevron-right" />
               </div>

@@ -1,6 +1,6 @@
 .footer {
-  border-top: 1px solid var(--border-subtle);
-  background: var(--bg-secondary);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: #04070e;
   padding: 5rem 1.5rem 3rem;
   position: relative;
   overflow: hidden;
@@ -15,17 +15,17 @@
   gap: 3.5rem;
 }
 
-/* Feddy Spotlight Showcase Card */
-.feddySpotlight {
+/* Executive AI Spotlight Card */
+.executiveSpotlight {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
   padding: 1.75rem 2.25rem;
-  background: linear-gradient(135deg, rgba(0, 39, 94, 0.45) 0%, rgba(13, 20, 36, 0.85) 60%, rgba(247, 166, 0, 0.1) 100%);
-  border: 1px solid rgba(247, 166, 0, 0.35);
+  background: linear-gradient(135deg, rgba(13, 20, 36, 0.8) 0%, rgba(9, 14, 26, 0.95) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.3);
   border-radius: 24px;
-  box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
@@ -33,83 +33,117 @@
   touch-action: manipulation;
 }
 
-.feddySpotlight:hover {
+.executiveSpotlight:hover {
   transform: translateY(-2px);
-  border-color: rgba(247, 166, 0, 0.7);
-  box-shadow: 0 20px 50px -10px rgba(247, 166, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: rgba(56, 189, 248, 0.65);
+  box-shadow: 0 25px 55px -10px rgba(56, 189, 248, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-.feddySpotlightVisual {
+.spotlightVisual {
   position: relative;
-  width: 72px;
-  height: 90px;
+  width: 68px;
+  height: 68px;
   flex-shrink: 0;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
 }
 
-.feddySpotlightVisual img,
-.main__topSection__logo {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+.spotlightAvatarBox {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(56, 189, 248, 0.5);
+  background: #090d16;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.spotlightAvatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   transition: transform 0.3s ease;
 }
 
-.feddySpotlight:hover .feddySpotlightVisual img {
-  transform: scale(1.1) translateY(-4px);
+.executiveSpotlight:hover .spotlightAvatarImg {
+  transform: scale(1.08);
 }
 
-.feddySpotlightPulse {
+.avatarOnlineDot {
   position: absolute;
-  bottom: 0;
-  width: 50px;
-  height: 50px;
+  bottom: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(247, 166, 0, 0.35) 0%, transparent 70%);
-  z-index: -1;
-  animation: pulse-ring 2.5s infinite;
+  background: #10b981;
+  border: 2px solid #090d16;
+  box-shadow: 0 0 8px #10b981;
 }
 
-.feddySpotlightContent {
+.spotlightPulseRing {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(56, 189, 248, 0.4);
+  animation: pulse-ring 2.5s infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  60% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+}
+
+.spotlightContent {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
 }
 
-.feddySpotlightHeader {
+.spotlightHeader {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   flex-wrap: wrap;
 }
 
-.feddyTag {
+.corporateBadgeTag {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  color: #f7a600;
+  color: var(--accent-cyan);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.feddyStatusBadge {
+.statusLivePill {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.25rem 0.65rem;
+  padding: 0.2rem 0.65rem;
   background: rgba(16, 185, 129, 0.12);
   border: 1px solid rgba(16, 185, 129, 0.3);
   border-radius: 999px;
-  font-size: 0.72rem;
-  color: var(--accent-emerald);
+  font-size: 0.7rem;
+  color: #34d399;
   font-family: var(--font-mono);
 }
 
-.feddySpotlightTitle {
+.spotlightTitle {
   font-family: var(--font-heading);
   font-size: 1.25rem;
   font-weight: 800;
@@ -118,46 +152,49 @@
   letter-spacing: -0.01em;
 }
 
-.feddySpotlightDesc {
-  font-size: 0.88rem;
+.spotlightDesc {
+  font-size: 0.86rem;
   color: var(--text-secondary);
-  line-height: 1.5;
+  line-height: 1.55;
   margin: 0;
-  max-width: 650px;
+  max-width: 680px;
 }
 
-.feddySpotlightAction {
+.spotlightAction {
   flex-shrink: 0;
 }
 
-.feddyActionBtn {
+.spotlightActionBtn {
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
   padding: 0.75rem 1.35rem;
-  background: #f7a600;
-  color: #002244;
+  background: var(--gradient-executive);
+  color: #04060a;
   font-family: var(--font-heading);
   font-size: 0.88rem;
   font-weight: 800;
   border-radius: 12px;
   letter-spacing: 0.01em;
-  box-shadow: 0 4px 15px rgba(247, 166, 0, 0.35);
-  transition: all 0.2s ease;
+  box-shadow: 0 6px 20px -3px rgba(56, 189, 248, 0.4);
+  transition: all 0.25s ease;
   white-space: nowrap;
 }
 
-.feddySpotlight:hover .feddyActionBtn {
-  background: #ffb41f;
+.executiveSpotlight:hover .spotlightActionBtn {
   transform: translateX(4px);
-  box-shadow: 0 6px 20px rgba(247, 166, 0, 0.5);
+  box-shadow: 0 8px 25px rgba(56, 189, 248, 0.6);
 }
 
-/* Luxury Networks Section */
-.luxuryNetworksSection {
+.spotlightActionBtn i:first-child {
+  font-size: 0.82rem;
+}
+
+/* Corporate Networks Section */
+.networksSection {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.15rem;
   padding-bottom: 0.5rem;
 }
 
@@ -183,19 +220,19 @@
   color: var(--text-muted);
 }
 
-.luxuryNetworks {
+.networksGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 1rem;
 }
 
-.luxuryPill {
+.networkPill {
   display: flex;
   align-items: center;
   gap: 0.85rem;
   padding: 0.85rem 1.1rem;
   background: rgba(13, 20, 36, 0.5);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   text-decoration: none;
   color: var(--text-primary);
@@ -205,14 +242,14 @@
   min-height: 58px;
 }
 
-.luxuryPill:hover {
+.networkPill:hover {
   transform: translateY(-2px);
   background: rgba(20, 30, 55, 0.8);
   border-color: rgba(56, 189, 248, 0.4);
   box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.4);
 }
 
-.iconCircle {
+.iconWrap {
   width: 40px;
   height: 40px;
   border-radius: 12px;
@@ -224,13 +261,13 @@
   transition: transform 0.25s ease;
 }
 
-.luxuryPill:hover .iconCircle {
+.networkPill:hover .iconWrap {
   transform: scale(1.1);
 }
 
 .iconLinkedin {
   background: rgba(10, 102, 194, 0.15);
-  color: #0a66c2;
+  color: #38bdf8;
   border: 1px solid rgba(10, 102, 194, 0.35);
 }
 
@@ -258,21 +295,21 @@
   border: 1px solid rgba(168, 85, 247, 0.35);
 }
 
-.pillMeta {
+.pillText {
   display: flex;
   flex-direction: column;
   flex: 1;
   min-width: 0;
 }
 
-.pillLabel {
+.pillHeading {
   font-family: var(--font-heading);
   font-size: 0.88rem;
   font-weight: 700;
   color: #ffffff;
 }
 
-.pillDetail {
+.pillSub {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--text-muted);
@@ -281,21 +318,21 @@
   text-overflow: ellipsis;
 }
 
-.externalIcon {
+.pillArrow {
   font-size: 0.75rem;
   color: var(--text-muted);
   opacity: 0.6;
   transition: all 0.2s ease;
 }
 
-.luxuryPill:hover .externalIcon {
+.networkPill:hover .pillArrow {
   opacity: 1;
   color: var(--accent-cyan);
   transform: translate(2px, -2px);
 }
 
-/* Directory Top Row */
-.topRow {
+/* Corporate Directory Grid */
+.directoryGrid {
   display: grid;
   grid-template-columns: 1.3fr 2fr;
   gap: 4rem;
@@ -315,8 +352,8 @@
 }
 
 .monogram {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
   background: var(--gradient-executive);
   color: #04060a;
@@ -335,11 +372,22 @@
   flex-direction: column;
 }
 
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
 .name {
   font-family: var(--font-heading);
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 800;
   color: #ffffff;
+}
+
+.nameRow i {
+  color: #38bdf8;
+  font-size: 0.85rem;
 }
 
 .title {
@@ -352,7 +400,7 @@
   font-size: 0.9rem;
   color: var(--text-secondary);
   line-height: 1.65;
-  max-width: 400px;
+  max-width: 420px;
 }
 
 .complianceRow {
@@ -368,9 +416,9 @@
   gap: 0.45rem;
   padding: 0.35rem 0.75rem;
   border-radius: 8px;
-  background: rgba(16, 185, 129, 0.06);
-  border: 1px solid rgba(16, 185, 129, 0.2);
-  color: var(--accent-emerald);
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: #34d399;
   font-size: 0.72rem;
   font-family: var(--font-mono);
 }
@@ -381,14 +429,14 @@
   gap: 0.45rem;
   padding: 0.35rem 0.75rem;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--text-muted);
   font-size: 0.72rem;
   font-family: var(--font-mono);
 }
 
-.linksGrid {
+.linksColumns {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
@@ -431,9 +479,15 @@
   transform: translateX(3px);
 }
 
+.coordLabel {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
 .bottomRow {
   padding-top: 2rem;
-  border-top: 1px solid var(--border-subtle);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -460,34 +514,34 @@
 }
 
 .divider {
-  color: var(--border-medium);
+  color: rgba(255, 255, 255, 0.2);
   font-size: 0.6rem;
 }
 
-/* Multi-Device Responsiveness (ISO Standard) */
+/* Multi-Device Responsiveness */
 @media (max-width: 960px) {
-  .topRow {
+  .directoryGrid {
     grid-template-columns: 1fr;
     gap: 2.75rem;
   }
 
-  .linksGrid {
+  .linksColumns {
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
   }
 
-  .feddySpotlight {
+  .executiveSpotlight {
     flex-direction: column;
     align-items: flex-start;
     padding: 1.5rem;
     gap: 1.25rem;
   }
 
-  .feddySpotlightAction {
+  .spotlightAction {
     width: 100%;
   }
 
-  .feddyActionBtn {
+  .spotlightActionBtn {
     width: 100%;
     justify-content: center;
   }
@@ -498,11 +552,11 @@
     padding: 3.5rem 1rem 2.25rem;
   }
 
-  .luxuryNetworks {
+  .networksGrid {
     grid-template-columns: 1fr;
   }
 
-  .linksGrid {
+  .linksColumns {
     grid-template-columns: 1fr;
     gap: 1.75rem;
   }
@@ -513,16 +567,16 @@
     gap: 0.85rem;
   }
 
-  .feddySpotlightVisual {
-    width: 58px;
-    height: 72px;
+  .spotlightAvatarBox {
+    width: 52px;
+    height: 52px;
   }
 
-  .feddySpotlightTitle {
+  .spotlightTitle {
     font-size: 1.1rem;
   }
 
-  .feddySpotlightDesc {
+  .spotlightDesc {
     font-size: 0.82rem;
   }
 }

@@ -190,23 +190,8 @@ export default function Navigation() {
             })}
           </nav>
 
-          {/* Right Action Suite (Executive AI, Locale Selector & Consultation CTA) */}
+          {/* Right Action Suite (Locale Selector & Consultation CTA) */}
           <div className={styles.actions}>
-            {/* Executive AI Assistant Button */}
-            <button
-              type="button"
-              onClick={openExecutiveAI}
-              className={styles.executiveAIBtn}
-              title="Open Jami Eswar Anil Kumar Executive AI Assistant"
-              aria-label="Open Executive AI Assistant"
-            >
-              <div className={styles.aiIconPulse}>
-                <i className="fa-solid fa-wand-magic-sparkles" />
-              </div>
-              <span className={styles.aiBtnText}>Executive AI</span>
-              <span className={styles.aiLiveBadge}>24/7</span>
-            </button>
-
             {/* Integrated Indian Language Locale Selector */}
             <div className={styles.localeWrapper} ref={dropdownRef}>
               <button
